@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 
-import "./ProjectsList.scss";
-
 export const Home = ({}) => {
   return (
-    <section className="projects-list">
+    <section className="home-page">
       <h1>Home</h1>
       <h2>
         <Link to="/projects">Projects</Link>

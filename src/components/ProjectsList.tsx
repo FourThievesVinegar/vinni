@@ -1,14 +1,26 @@
-import "./ProjectsList.scss";
+import { Link } from "react-router-dom";
+
+import { useProjectsContext } from "../contexts/ProjectsContext";
 
 export const ProjectsList = ({}) => {
+  const { projects } = useProjectsContext();
+
   return (
-    <section className="projects-list">
+    <>
       <h1>Microlab Projects</h1>
-      <ul>
-        <li>Project 1</li>
-        <li>Project 2</li>
-        <li>Project 3</li>
+      <Link to="/projects/new">Create New Project</Link>
+      <ul className="projects-list">
+        {projects &&
+          Object.keys(projects).map((key) => {
+            return (
+              <li>
+                <Link to={`/projects/${key}`} key={key}>
+                  {key}
+                </Link>
+              </li>
+            );
+          })}
       </ul>
-    </section>
+    </>
   );
 };

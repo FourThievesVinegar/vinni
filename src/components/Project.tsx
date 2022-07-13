@@ -1,11 +1,19 @@
+import { useParams, useNavigate } from "react-router-dom";
+import { useProjectsContext } from "../contexts/ProjectsContext";
+
 export const Project = ({}) => {
+  const { projectId } = useParams();
+  const { projects } = useProjectsContext();
+  let navigate = useNavigate();
+
+  if (!projectId) {
+    navigate("/projects");
+  }
+
   return (
     <section>
-      <h1>Project Title</h1>
-      <h2>Research</h2>
-      <h2>Compounds</h2>
-      <h2>Pathways</h2>
-      <h2>Recipes</h2>
+      <h1>{projectId}</h1>
+      {projectId && JSON.stringify(projects[projectId])}
     </section>
   );
 };
