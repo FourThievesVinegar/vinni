@@ -13,10 +13,8 @@ export const ProjectsList = ({}) => {
         {projects &&
           Object.keys(projects).map((key) => {
             return (
-              <li>
-                <Link to={`/projects/${key}`} key={key}>
-                  {key}
-                </Link>
+              <li key={key}>
+                <Link to={`/projects/${key}`}>{key}</Link>
               </li>
             );
           })}

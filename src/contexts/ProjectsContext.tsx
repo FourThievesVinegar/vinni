@@ -1,13 +1,16 @@
-import { createContext, useContext, useState } from "react";
+import { chownSync } from "fs";
+import { createContext, useContext, useEffect, useState } from "react";
+import { NoteType } from "./NotesContext";
 
 interface ProjectsContextType {
+  addNoteToProject: (noteId: string, projectId: string) => void;
   createProject: (name: string) => string | null;
   projects?: any;
 }
 
 interface ProjectType {
   name: string;
-  // notes: NoteType[],
+  notes: NoteType[];
   // compounds: CompoundType[],
   // pathways: PathwayType[],
 }
@@ -61,6 +64,7 @@ interface StepOptionType {
 */
 
 const ProjectsContext = createContext<ProjectsContextType>({
+  addNoteToProject: () => null,
   createProject: () => null,
   projects: {},
 });
@@ -78,6 +82,22 @@ export const useProjectsContext = () => {
 export const ProjectsProvider = ({ children }: any) => {
   const [projects, setProjects] = useState<any>({});
 
+  useEffect(() => {
+    loadProjects();
+  }, []);
+
+  useEffect(() => {
+    saveProjects();
+  }, [projects]);
+
+  const saveProjects = () => {
+    localStorage.setItem("vinni-projects", JSON.stringify(projects));
+  };
+
+  const loadProjects = () => {
+    setProjects(JSON.parse(localStorage.getItem("vinni-projects") || "{}"));
+  };
+
   const createProject = (name: string) => {
     if (projects[name]) {
       return "Project with that name already exists!";
@@ -90,8 +110,21 @@ export const ProjectsProvider = ({ children }: any) => {
     return null;
   };
 
+  const addNoteToProject = (noteId: string, projectId: string) => {
+    let newNotes = projects[projectId]["notes"];
+    newNotes.push(noteId);
+    const newProjects = {
+      ...projects,
+      [projectId]: { ...projects[projectId], notes: [...newNotes] },
+    };
+
+    setProjects(newProjects);
+  };
+
   return (
-    <ProjectsContext.Provider value={{ createProject, projects }}>
+    <ProjectsContext.Provider
+      value={{ addNoteToProject, createProject, projects }}
+    >
       {children}
     </ProjectsContext.Provider>
   );

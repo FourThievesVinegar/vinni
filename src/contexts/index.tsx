@@ -1,5 +1,10 @@
+import { NotesProvider } from "./NotesContext";
 import { ProjectsProvider } from "./ProjectsContext";
 
 export const ContextWrapper = ({ children }: any) => {
-  return <ProjectsProvider>{children}</ProjectsProvider>;
+  return (
+    <NotesProvider>
+      <ProjectsProvider>{children}</ProjectsProvider>
+    </NotesProvider>
+  );
 };
