@@ -25,24 +25,24 @@ export const useNotesContext = () => {
   return context;
 };
 
+const saveNotes = (notes: { string: NoteType }) => {
+  localStorage.setItem("vinni-notes", JSON.stringify(notes));
+};
+
+const loadNotes = () => {
+  return JSON.parse(localStorage.getItem("vinni-notes") || "{}");
+};
+
 export const NotesProvider = ({ children }: any) => {
   const [notes, setNotes] = useState<any>({});
 
   useEffect(() => {
-    loadNotes();
+    setNotes(loadNotes());
   }, []);
 
   useEffect(() => {
-    saveNotes();
+    saveNotes(notes);
   }, [notes]);
-
-  const saveNotes = () => {
-    localStorage.setItem("vinni-notes", JSON.stringify(notes));
-  };
-
-  const loadNotes = () => {
-    setNotes(JSON.parse(localStorage.getItem("vinni-notes") || "{}"));
-  };
 
   const createNote = (text: string) => {
     const noteId = nanoid(12);

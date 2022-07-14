@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { useProjectsContext } from "../contexts/ProjectsContext";
 
-export const ProjectsList = ({}) => {
+export const ProjectsList = () => {
   const { projects } = useProjectsContext();
 
   return (

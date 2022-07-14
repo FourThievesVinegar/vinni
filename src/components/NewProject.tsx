@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useProjectsContext } from "../contexts/ProjectsContext";
 
-export const NewProject = ({}) => {
+export const NewProject = () => {
   const [projectName, setProjectName] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const { createProject } = useProjectsContext();

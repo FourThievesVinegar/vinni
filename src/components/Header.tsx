@@ -5,7 +5,7 @@ import vinniNoJaw from "../images/vinni-no-jaw.svg";
 
 import "./Header.scss";
 
-export const Header = ({}) => {
+export const Header = () => {
   return (
     <header>
       <section className="vinni-section">
@@ -21,8 +21,8 @@ export const Header = ({}) => {
           </p>
         </div>
         <div className="vinni-container">
-          <img className="vinni-head" src={vinniNoJaw} />
-          <img className="vinni-jaw talking" src={vinniJaw} />
+          <img className="vinni-head" src={vinniNoJaw} alt="" />
+          <img className="vinni-jaw talking" src={vinniJaw} alt="" />
         </div>
       </section>
     </header>

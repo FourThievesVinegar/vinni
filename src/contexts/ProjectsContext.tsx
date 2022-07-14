@@ -1,4 +1,3 @@
-import { chownSync } from "fs";
 import { createContext, useContext, useEffect, useState } from "react";
 import { NoteType } from "./NotesContext";
 
@@ -79,24 +78,24 @@ export const useProjectsContext = () => {
   return context;
 };
 
+const saveProjects = (projects: { string: ProjectType }) => {
+  localStorage.setItem("vinni-projects", JSON.stringify(projects));
+};
+
+const loadProjects = () => {
+  return JSON.parse(localStorage.getItem("vinni-projects") || "{}");
+};
+
 export const ProjectsProvider = ({ children }: any) => {
   const [projects, setProjects] = useState<any>({});
 
   useEffect(() => {
-    loadProjects();
+    setProjects(loadProjects());
   }, []);
 
   useEffect(() => {
-    saveProjects();
+    saveProjects(projects);
   }, [projects]);
-
-  const saveProjects = () => {
-    localStorage.setItem("vinni-projects", JSON.stringify(projects));
-  };
-
-  const loadProjects = () => {
-    setProjects(JSON.parse(localStorage.getItem("vinni-projects") || "{}"));
-  };
 
   const createProject = (name: string) => {
     if (projects[name]) {

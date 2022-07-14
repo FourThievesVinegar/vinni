@@ -2,7 +2,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { useProjectsContext } from "../contexts/ProjectsContext";
 import { ProjectNotes } from "./Project/ProjectNotes";
 
-export const Project = ({}) => {
+export const Project = () => {
   const { projectId } = useParams();
   const { projects } = useProjectsContext();
   let navigate = useNavigate();

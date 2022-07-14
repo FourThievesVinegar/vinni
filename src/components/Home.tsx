@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const Home = ({}) => {
+export const Home = () => {
   return (
     <section className="home-page">
       <h1>Home</h1>
