@@ -1,7 +1,5 @@
-import { useState } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { useCompoundsContext } from "../../contexts/CompoundsContext";
-import { useProjectsContext } from "../../contexts/ProjectsContext";
 
 interface ProjectResearchProps {
   projectCompounds: string[];
@@ -12,7 +10,6 @@ export const ProjectResearch = ({
   projectCompounds,
   projectId,
 }: ProjectResearchProps) => {
-  const { addCompoundToProject } = useProjectsContext();
   const { compounds, openChemhackticaDialog } = useCompoundsContext();
 
   return (
