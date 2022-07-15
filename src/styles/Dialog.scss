@@ -1,0 +1,45 @@
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  background: rgba(0 0 0 / 0.5);
+}
+
+.dialog-content {
+  position: fixed;
+  top: 32px;
+  left: 32px;
+  right: 32px;
+  bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 32px 32px 32px;
+  border-radius: 16px;
+  background-color: black;
+  border: 2px solid white;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.dialog-body {
+  width: 100%;
+  flex-grow: 1;
+}
+
+.dialog-iframe {
+  width: 100%;
+  height: 100%;
+}

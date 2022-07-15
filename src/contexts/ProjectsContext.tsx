@@ -2,7 +2,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { NoteType } from "./NotesContext";
 
 interface ProjectsContextType {
+  addCompoundToProject: (noteId: string, compoundId: string) => void;
   addNoteToProject: (noteId: string, projectId: string) => void;
+  addRecipeToProject: (recipeId: string, projectId: string) => void;
   createProject: (name: string) => string | null;
   projects?: any;
 }
@@ -63,7 +65,9 @@ interface StepOptionType {
 */
 
 const ProjectsContext = createContext<ProjectsContextType>({
+  addCompoundToProject: () => null,
   addNoteToProject: () => null,
+  addRecipeToProject: () => null,
   createProject: () => null,
   projects: {},
 });
@@ -109,6 +113,17 @@ export const ProjectsProvider = ({ children }: any) => {
     return null;
   };
 
+  const addCompoundToProject = (compoundId: string, projectId: string) => {
+    let newCompounds = projects[projectId]["notes"];
+    newCompounds.push(compoundId);
+    const newProjects = {
+      ...projects,
+      [projectId]: { ...projects[projectId], compounds: [...newCompounds] },
+    };
+
+    setProjects(newProjects);
+  };
+
   const addNoteToProject = (noteId: string, projectId: string) => {
     let newNotes = projects[projectId]["notes"];
     newNotes.push(noteId);
@@ -120,9 +135,26 @@ export const ProjectsProvider = ({ children }: any) => {
     setProjects(newProjects);
   };
 
+  const addRecipeToProject = (recipeId: string, projectId: string) => {
+    let newRecipes = projects[projectId]["recipes"];
+    newRecipes.push(recipeId);
+    const newProjects = {
+      ...projects,
+      [projectId]: { ...projects[projectId], recipes: [...newRecipes] },
+    };
+
+    setProjects(newProjects);
+  };
+
   return (
     <ProjectsContext.Provider
-      value={{ addNoteToProject, createProject, projects }}
+      value={{
+        addCompoundToProject,
+        addNoteToProject,
+        addRecipeToProject,
+        createProject,
+        projects,
+      }}
     >
       {children}
     </ProjectsContext.Provider>

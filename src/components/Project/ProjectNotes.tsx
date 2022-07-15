@@ -24,7 +24,7 @@ export const ProjectNotes = ({
 
   return (
     <>
-      <Accordion.Root type="multiple">
+      <Accordion.Root type="multiple" className="projects-page-accordion">
         <Accordion.Item value="notes">
           <Accordion.Header>
             <Accordion.Trigger>
