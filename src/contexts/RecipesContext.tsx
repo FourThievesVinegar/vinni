@@ -82,15 +82,12 @@ export const RecipesProvider = ({ children }: any) => {
     setEditorIFrame(
       document.getElementById("recipe-editor-iframe") as HTMLIFrameElement
     );
-    document.addEventListener("message", handleMessageFromRecipeEditorIFrame);
+    window.addEventListener("message", handleMessageFromRecipeEditorIFrame);
   };
 
   const closeRecipeEditor = () => {
     setEditingRecipe(null);
-    document.removeEventListener(
-      "message",
-      handleMessageFromRecipeEditorIFrame
-    );
+    window.removeEventListener("message", handleMessageFromRecipeEditorIFrame);
   };
 
   const handleMessageFromRecipeEditorIFrame = (event: any) => {
