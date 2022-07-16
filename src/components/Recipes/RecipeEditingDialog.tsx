@@ -26,6 +26,7 @@ export const RecipeEditorDialog = () => {
             style={{
               backgroundImage: `url(${loaderSmashy})`,
               backgroundPosition: "center",
+              backgroundRepeat: "none",
             }}
           >
             <iframe
