@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import { updateIntersectionTypeNode } from "typescript";
 
 interface RecipesContextType {
   closeRecipeEditor: () => void;
