@@ -112,6 +112,7 @@ export const RecipesProvider = ({ children }: any) => {
       type: MESSAGE_TYPES.RECIPE,
       payload: editingRecipe ? recipes[editingRecipe] : {},
     };
+    console.log("SENDING RECIPE TO IFRAME", message);
     editorIFrame?.contentWindow?.postMessage(message);
   };
 
