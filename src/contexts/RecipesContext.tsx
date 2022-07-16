@@ -91,13 +91,14 @@ export const RecipesProvider = ({ children }: any) => {
   };
 
   const handleMessageFromRecipeEditorIFrame = (event: any) => {
-    console.log("MESSAGE FROM IFRAME", event);
     switch (event.data.type) {
       case MESSAGE_TYPES.RECIPE_REQUEST: {
+        console.log("RECIPE REQUEST FROM IFRAME", event.data);
         sendRecipeToEditorIFrame();
         return;
       }
       case MESSAGE_TYPES.RECIPE: {
+        console.log("RECIPE UPDATE FROM IFRAME", event.data);
         if (editingRecipe) {
           updateRecipe(editingRecipe, event.data.payload);
         }
