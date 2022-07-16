@@ -3,6 +3,8 @@ import * as Accordion from "@radix-ui/react-accordion";
 import { useNotesContext } from "../../contexts/NotesContext";
 import { useProjectsContext } from "../../contexts/ProjectsContext";
 
+import "./ProjectNotes.scss";
+
 interface ProjectNotesProps {
   projectNotes: string[];
   projectId: string;
@@ -18,8 +20,10 @@ export const ProjectNotes = ({
   const [newNoteText, setNewNoteText] = useState<string>("");
 
   const handleCreateNote = (text: string) => {
+    if (text.length === 0) return;
     const noteId = createNote(text);
     addNoteToProject(noteId, projectId);
+    setNewNoteText("");
   };
 
   return (
@@ -34,7 +38,9 @@ export const ProjectNotes = ({
           <Accordion.Content>
             <ul>
               {projectNotes.map((noteId) => (
-                <li key={noteId}>{notes[noteId]}</li>
+                <li className="project-note" key={noteId}>
+                  {notes[noteId]}
+                </li>
               ))}
             </ul>
             {projectNotes.length === 0 && <p>No notes yet.</p>}
@@ -47,7 +53,6 @@ export const ProjectNotes = ({
             <button
               onClick={(e) => {
                 handleCreateNote(newNoteText);
-                setNewNoteText("");
               }}
             >
               New note

@@ -1,3 +1,5 @@
+import { saveAs } from "file-saver";
+
 import { createContext, useContext, useEffect, useState } from "react";
 import { NoteType } from "./NotesContext";
 
@@ -6,6 +8,7 @@ interface ProjectsContextType {
   addNoteToProject: (noteId: string, projectId: string) => void;
   addRecipeToProject: (recipeId: string, projectId: string) => void;
   createProject: (name: string) => string | null;
+  exportProject: (projectId: string) => void;
   projects?: any;
 }
 
@@ -69,6 +72,7 @@ const ProjectsContext = createContext<ProjectsContextType>({
   addNoteToProject: () => null,
   addRecipeToProject: () => null,
   createProject: () => null,
+  exportProject: () => null,
   projects: {},
 });
 
@@ -113,8 +117,33 @@ export const ProjectsProvider = ({ children }: any) => {
     return null;
   };
 
+  const exportProject = (projectId: string) => {
+    let projectString = "{}";
+    // Export project object as
+    /*
+    {
+      projects: {
+        ProjectId: {JSON.stringify(projects[projectId])}
+      }
+      notes: {
+        noteIds: {noteValues}
+      }
+      recipes: {
+        recipeIds: {recipeValues}
+      }
+      compounds: {
+        compoundIds: {compoundValues}
+      }
+    }
+    */
+    saveAs(
+      new Blob([projectString], { type: "application/json" }),
+      `${projectId}.json`
+    ); // Export JSON file of the project
+  };
+
   const addCompoundToProject = (compoundId: string, projectId: string) => {
-    let newCompounds = projects[projectId]["notes"];
+    let newCompounds = projects[projectId]["compounds"];
     newCompounds.push(compoundId);
     const newProjects = {
       ...projects,
@@ -153,6 +182,7 @@ export const ProjectsProvider = ({ children }: any) => {
         addNoteToProject,
         addRecipeToProject,
         createProject,
+        exportProject,
         projects,
       }}
     >

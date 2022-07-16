@@ -17,3 +17,12 @@
     cursor: pointer;
   }
 }
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    height: 24px;
+  }
+}

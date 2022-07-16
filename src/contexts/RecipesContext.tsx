@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
+import { updateIntersectionTypeNode } from "typescript";
 
 interface RecipesContextType {
   closeRecipeEditor: () => void;
@@ -13,7 +14,13 @@ export interface RecipeType {
   text: string;
 }
 
-export const RECIPE_EDITOR_URL = "https://recipe-press.netlify.app/";
+const MESSAGE_TYPES = {
+  RECIPE: "recipe",
+  RECIPE_REQUEST: "recipe request",
+};
+
+export const RECIPE_EDITOR_URL =
+  "https://recipe-press.netlify.app/?embedded=true";
 
 const RecipesContext = createContext<RecipesContextType>({
   closeRecipeEditor: () => {},
@@ -44,6 +51,9 @@ const loadRecipes = () => {
 export const RecipesProvider = ({ children }: any) => {
   const [recipes, setRecipes] = useState<any>({});
   const [editingRecipe, setEditingRecipe] = useState<string | null>(null);
+  const [editorIFrame, setEditorIFrame] = useState<HTMLIFrameElement | null>(
+    null
+  );
 
   useEffect(() => {
     setRecipes(loadRecipes());
@@ -55,20 +65,55 @@ export const RecipesProvider = ({ children }: any) => {
 
   const createRecipe = (title: string) => {
     const recipeId = nanoid(12);
+    updateRecipe(recipeId, { title, steps: [] });
+    return recipeId;
+  };
+
+  const updateRecipe = (recipeId: string, recipe: any) => {
     const newRecipes = {
       ...recipes,
-      [recipeId]: { title },
+      [recipeId]: { ...recipe },
     };
     setRecipes(newRecipes);
-    return recipeId;
   };
 
   const editRecipe = (recipeId: string) => {
     setEditingRecipe(recipeId);
+    setEditorIFrame(
+      document.getElementById("recipe-editor-iframe") as HTMLIFrameElement
+    );
+    document.addEventListener("message", handleMessageFromRecipeEditorIFrame);
   };
 
   const closeRecipeEditor = () => {
     setEditingRecipe(null);
+    document.removeEventListener(
+      "message",
+      handleMessageFromRecipeEditorIFrame
+    );
+  };
+
+  const handleMessageFromRecipeEditorIFrame = (event: any) => {
+    console.log("MESSAGE FROM IFRAME", event);
+    switch (event.data.type) {
+      case MESSAGE_TYPES.RECIPE_REQUEST: {
+        sendRecipeToEditorIFrame();
+        return;
+      }
+      case MESSAGE_TYPES.RECIPE: {
+        if (editingRecipe) {
+          updateRecipe(editingRecipe, event.data.payload);
+        }
+      }
+    }
+  };
+
+  const sendRecipeToEditorIFrame = () => {
+    const message = {
+      type: MESSAGE_TYPES.RECIPE,
+      payload: editingRecipe ? recipes[editingRecipe] : {},
+    };
+    editorIFrame?.contentWindow?.postMessage(message);
   };
 
   return (

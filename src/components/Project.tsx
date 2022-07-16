@@ -1,8 +1,8 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useProjectsContext } from "../contexts/ProjectsContext";
-import { ProjectNotes } from "./Project/ProjectNotes";
-import { ProjectRecipes } from "./Project/ProjectRecipes";
-import { ProjectResearch } from "./Project/ProjectResearch";
+import { ProjectNotes } from "./Projects/ProjectNotes";
+import { ProjectRecipes } from "./Projects/ProjectRecipes";
+import { ProjectResearch } from "./Projects/ProjectResearch";
 
 export const Project = () => {
   const { projectId } = useParams();
@@ -18,9 +18,12 @@ export const Project = () => {
 
   return (
     <>
-      <h1>
-        <Link to="/projects">{"<"}</Link> Project: {projectId}
-      </h1>
+      <header className="project-header">
+        <h1>
+          <Link to="/projects">{"<"}</Link> Project: {projectId}
+        </h1>
+        <button>Export</button>
+      </header>
       {projectId && JSON.stringify(project)}
       {project && (
         <>

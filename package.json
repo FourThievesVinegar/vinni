@@ -12,6 +12,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "file-saver": "^2.0.5",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -45,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "sass": "^1.53.0"
   }
 }

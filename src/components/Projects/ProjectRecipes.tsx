@@ -3,6 +3,8 @@ import * as Accordion from "@radix-ui/react-accordion";
 import { useRecipesContext } from "../../contexts/RecipesContext";
 import { useProjectsContext } from "../../contexts/ProjectsContext";
 
+import "./ProjectRecipes.scss";
+
 interface ProjectRecipesProps {
   projectRecipes: string[];
   projectId: string;
@@ -18,9 +20,12 @@ export const ProjectRecipes = ({
   const [newRecipeTitle, setNewRecipeText] = useState<string>("");
 
   const handleCreateRecipe = (title: string) => {
+    if (title.length === 0) return;
+
     const recipeId = createRecipe(title);
     addRecipeToProject(recipeId, projectId);
     editRecipe(recipeId);
+    setNewRecipeText("");
   };
 
   const handleEditRecipe = (recipeId: string) => {
@@ -37,7 +42,7 @@ export const ProjectRecipes = ({
             </Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content>
-            <ul>
+            <ul className="project-recipes">
               {projectRecipes.map((recipeId) => (
                 <li key={recipeId}>
                   <button
@@ -51,16 +56,15 @@ export const ProjectRecipes = ({
               ))}
             </ul>
             {projectRecipes.length === 0 && <p>No recipes yet.</p>}
-            <textarea
+            <input
               value={newRecipeTitle}
               onChange={(e) => {
                 setNewRecipeText(e.target.value);
               }}
-            ></textarea>
+            />
             <button
               onClick={(e) => {
                 handleCreateRecipe(newRecipeTitle);
-                setNewRecipeText("");
               }}
             >
               New recipe

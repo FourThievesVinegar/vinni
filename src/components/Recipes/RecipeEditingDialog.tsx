@@ -21,6 +21,7 @@ export const RecipeEditorDialog = () => {
           </div>
           <div className="dialog-body">
             <iframe
+              id="recipe-editor-iframe"
               src={RECIPE_EDITOR_URL}
               title="Recipe Editor"
               className="dialog-iframe"
