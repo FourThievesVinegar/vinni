@@ -1,9 +1,12 @@
 import * as Dialog from "@radix-ui/react-dialog";
+import { url } from "inspector";
 
 import {
   useRecipesContext,
   RECIPE_EDITOR_URL,
 } from "../../contexts/RecipesContext";
+
+import loaderSmashy from "../../images/loader-smashy.gif";
 
 export const RecipeEditorDialog = () => {
   const { closeRecipeEditor, editingRecipe, recipes } = useRecipesContext();
@@ -19,7 +22,13 @@ export const RecipeEditorDialog = () => {
             <Dialog.Title>Editing {recipeTitle}</Dialog.Title>{" "}
             <Dialog.Close onClick={() => closeRecipeEditor()}>X</Dialog.Close>
           </div>
-          <div className="dialog-body">
+          <div
+            className="dialog-body"
+            style={{
+              backgroundImage: `url(${loaderSmashy})`,
+              backgroundPosition: "center",
+            }}
+          >
             <iframe
               id="recipe-editor-iframe"
               src={RECIPE_EDITOR_URL}
