@@ -20,6 +20,7 @@ const MESSAGE_TYPES = {
 
 export const RECIPE_EDITOR_URL =
   "https://recipe-press.netlify.app/?embedded=true";
+export const RECIPE_EDITOR_DOMAIN = "https://recipe-press.netlify.app/";
 
 const RecipesContext = createContext<RecipesContextType>({
   closeRecipeEditor: () => {},
@@ -113,7 +114,7 @@ export const RecipesProvider = ({ children }: any) => {
       payload: editingRecipe ? recipes[editingRecipe] : {},
     };
     console.log("SENDING RECIPE TO IFRAME", message);
-    editorIFrame?.contentWindow?.postMessage(message);
+    editorIFrame?.contentWindow?.postMessage(message, "*"); //TODO: This is insecure - add allow-list once domains are set.
   };
 
   return (
