@@ -103,7 +103,7 @@ export const ProjectCompounds = ({
               >
                 {nonProjectCompoundIds.map((compoundId) => {
                   return (
-                    <option value={compoundId}>
+                    <option value={compoundId} key={compoundId}>
                       {compounds[compoundId].name}
                     </option>
                   );
