@@ -22,20 +22,22 @@ export const Project = () => {
         <h1>
           <Link to="/projects">{"<"}</Link> Project: {projectId}
         </h1>
-        <button>Export</button>
+        <button onClick={(e) => window.alert("Yeah I'm getting to it.")}>
+          Export
+        </button>
       </header>
-      {projectId && JSON.stringify(project)}
       {project && (
         <>
-          <ProjectNotes projectNotes={project["notes"]} projectId={projectId} />
           <ProjectResearch
             projectCompounds={project["compounds"]}
             projectId={projectId}
+            projectReactions={project["reactions"]}
           />
           <ProjectRecipes
             projectRecipes={project["recipes"]}
             projectId={projectId}
           />
+          <ProjectNotes projectNotes={project["notes"]} projectId={projectId} />
         </>
       )}
     </>

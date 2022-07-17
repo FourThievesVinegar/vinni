@@ -5,8 +5,10 @@ interface CompoundsContextType {
   browsingChemhacktica: boolean;
   closeChemhackticaDialog: () => void;
   createCompound: (name: string, smilesString: string) => string;
+  createReaction: (name: string, inputs: any, outputs: any) => string;
   compounds?: any;
   openChemhackticaDialog: () => void;
+  reactions?: any;
 }
 
 export interface CompoundType {
@@ -19,8 +21,10 @@ const CompoundsContext = createContext<CompoundsContextType>({
   browsingChemhacktica: false,
   closeChemhackticaDialog: () => {},
   createCompound: (name: string, smilesString: string) => "",
+  createReaction: (name: string, inputs: any, outputs: any) => "",
   compounds: {},
   openChemhackticaDialog: () => {},
+  reactions: {},
 });
 
 export const useCompoundsContext = () => {
@@ -41,18 +45,32 @@ const loadCompounds = () => {
   return JSON.parse(localStorage.getItem("vinni-compounds") || "{}");
 };
 
+const saveReactions = (reactions: { string: any }) => {
+  localStorage.setItem("vinni-reactions", JSON.stringify(reactions));
+};
+
+const loadReactions = () => {
+  return JSON.parse(localStorage.getItem("vinni-reactions") || "{}");
+};
+
 export const CompoundsProvider = ({ children }: any) => {
   const [compounds, setCompounds] = useState<any>({});
+  const [reactions, setReactions] = useState<any>({});
   const [browsingChemhacktica, setBrowsingChemhacktica] =
     useState<boolean>(false);
 
   useEffect(() => {
     setCompounds(loadCompounds());
+    setReactions(loadReactions);
   }, []);
 
   useEffect(() => {
     saveCompounds(compounds);
   }, [compounds]);
+
+  useEffect(() => {
+    saveReactions(reactions);
+  }, [reactions]);
 
   const createCompound = (name: string, smilesString: string) => {
     const compoundId = nanoid(12);
@@ -62,6 +80,16 @@ export const CompoundsProvider = ({ children }: any) => {
     };
     setCompounds(newCompounds);
     return compoundId;
+  };
+
+  const createReaction = (name: string, inputs: any, outputs: any) => {
+    const reactionId = nanoid(12);
+    const newReactions = {
+      ...reactions,
+      [reactionId]: { name, inputs, outputs },
+    };
+    setReactions(newReactions);
+    return reactionId;
   };
 
   const openChemhackticaDialog = () => {
@@ -79,7 +107,9 @@ export const CompoundsProvider = ({ children }: any) => {
         closeChemhackticaDialog,
         compounds,
         createCompound,
+        createReaction,
         openChemhackticaDialog,
+        reactions,
       }}
     >
       {children}

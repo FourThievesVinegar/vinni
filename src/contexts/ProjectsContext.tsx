@@ -7,6 +7,7 @@ interface ProjectsContextType {
   addCompoundToProject: (noteId: string, compoundId: string) => void;
   addNoteToProject: (noteId: string, projectId: string) => void;
   addRecipeToProject: (recipeId: string, projectId: string) => void;
+  addReactionToProject: (reactionId: string, projectId: string) => void;
   createProject: (name: string) => string | null;
   exportProject: (projectId: string) => void;
   projects?: any;
@@ -71,6 +72,7 @@ const ProjectsContext = createContext<ProjectsContextType>({
   addCompoundToProject: () => null,
   addNoteToProject: () => null,
   addRecipeToProject: () => null,
+  addReactionToProject: () => null,
   createProject: () => null,
   exportProject: () => null,
   projects: {},
@@ -111,7 +113,13 @@ export const ProjectsProvider = ({ children }: any) => {
     }
     const newProjects = {
       ...projects,
-      [name]: { notes: [], compounds: [], pathways: [], recipes: [] },
+      [name]: {
+        notes: [],
+        compounds: [],
+        pathways: [],
+        reactions: [],
+        recipes: [],
+      },
     };
     setProjects(newProjects);
     return null;
@@ -164,6 +172,17 @@ export const ProjectsProvider = ({ children }: any) => {
     setProjects(newProjects);
   };
 
+  const addReactionToProject = (reactionId: string, projectId: string) => {
+    let newReactions = projects[projectId]["reactions"];
+    newReactions.push(reactionId);
+    const newProjects = {
+      ...projects,
+      [projectId]: { ...projects[projectId], reactions: [...newReactions] },
+    };
+
+    setProjects(newProjects);
+  };
+
   const addRecipeToProject = (recipeId: string, projectId: string) => {
     let newRecipes = projects[projectId]["recipes"];
     newRecipes.push(recipeId);
@@ -180,6 +199,7 @@ export const ProjectsProvider = ({ children }: any) => {
       value={{
         addCompoundToProject,
         addNoteToProject,
+        addReactionToProject,
         addRecipeToProject,
         createProject,
         exportProject,

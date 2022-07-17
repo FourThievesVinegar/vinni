@@ -1,3 +1,74 @@
-.new-compound-form {
+.project-research-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   margin-bottom: 16px;
+  border-bottom: 1px solid white;
+}
+
+.project-compounds,
+.project-reactions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 45%;
+}
+
+.compound-forms-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.new-compound-form,
+.add-compound-form {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  & > * {
+    margin-bottom: 8px;
+  }
+}
+
+.projects-reactions-list {
+  li {
+    padding: 4px;
+    margin-bottom: 4px;
+    border: 1px solid white;
+  }
+}
+
+.project-reaction-accordion {
+  button {
+    width: 100%;
+  }
+}
+
+.reaction-accordion-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.new-reaction-input-output-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 16px;
+}
+
+.new-reaction-form {
+  margin-bottom: 16px;
+}
+
+.reaction-inputs-list,
+.reaction-outputs-list {
+  text-align: left;
+}
+
+.new-reaction-name-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

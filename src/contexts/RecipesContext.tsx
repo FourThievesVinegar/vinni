@@ -112,8 +112,7 @@ export const RecipesProvider = ({ children }: any) => {
 
   const sendRecipeToEditorIFrame = () => {
     if (!editingRecipe) {
-      console.log("NO RECIPE YET");
-      window.setTimeout(() => sendRecipeToEditorIFrame(), 100);
+      console.log("TRIED TO SEND RECIPE TO EDITOR BUT THERE WAS NONE");
       return;
     }
     const message = {
