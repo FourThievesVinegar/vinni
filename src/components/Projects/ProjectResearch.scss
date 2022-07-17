@@ -12,6 +12,12 @@
   flex-direction: column;
   justify-content: space-between;
   width: 45%;
+
+  h4 {
+    margin-bottom: 0;
+    border-bottom: 1px solid white;
+    padding-bottom: 16px;
+  }
 }
 
 .compound-forms-wrapper {
