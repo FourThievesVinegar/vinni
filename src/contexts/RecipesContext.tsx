@@ -101,9 +101,14 @@ export const RecipesProvider = ({ children }: any) => {
   };
 
   const sendRecipeToEditorIFrame = () => {
+    if (!editingRecipe) {
+      console.log("NO RECIPE YET");
+      window.setTimeout(() => sendRecipeToEditorIFrame(), 100);
+      return;
+    }
     const message = {
       messageType: MESSAGE_TYPES.RECIPE,
-      payload: editingRecipe ? recipes[editingRecipe] : {},
+      payload: recipes[editingRecipe],
     };
     console.log("SENDING RECIPE TO IFRAME", message);
     (
