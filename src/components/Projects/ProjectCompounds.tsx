@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useCompoundsContext } from "../../contexts/CompoundsContext";
 import { useProjectsContext } from "../../contexts/ProjectsContext";
 
+import "./ProjectCompounds.scss";
+
 interface ProjectCompoundsProps {
   projectCompounds: string[];
   projectId: string;

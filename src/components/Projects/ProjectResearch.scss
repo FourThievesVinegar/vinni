@@ -20,30 +20,6 @@
   }
 }
 
-.compound-forms-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  border-top: 1px solid white;
-  padding-top: 16px;
-}
-
-.new-compound-form,
-.add-compound-form {
-  display: flex;
-  flex-direction: column;
-  width: 45%;
-  & > input,
-  & > select {
-    margin-bottom: 8px;
-  }
-}
-
-.compound-forms-divider {
-  border-right: 1px solid white;
-}
-
 .projects-reactions-list {
   & > li {
     padding: 4px;
