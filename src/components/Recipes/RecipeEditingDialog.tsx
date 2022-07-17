@@ -29,12 +29,14 @@ export const RecipeEditorDialog = () => {
               backgroundRepeat: "none",
             }}
           >
-            <iframe
-              id="recipe-editor-iframe"
-              src={RECIPE_EDITOR_URL}
-              title="Recipe Editor"
-              className="dialog-iframe"
-            />
+            {editingRecipe && (
+              <iframe
+                id="recipe-editor-iframe"
+                src={RECIPE_EDITOR_URL}
+                title="Recipe Editor"
+                className="dialog-iframe"
+              />
+            )}
           </div>
         </Dialog.Content>
       </Dialog.Portal>

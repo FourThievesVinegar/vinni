@@ -60,6 +60,18 @@ export const RecipesProvider = ({ children }: any) => {
     saveRecipes(recipes);
   }, [recipes]);
 
+  useEffect(() => {
+    if (editingRecipe) {
+      window.addEventListener("message", handleMessageFromRecipeEditorIFrame);
+    } else {
+      window.removeEventListener(
+        "message",
+        handleMessageFromRecipeEditorIFrame
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editingRecipe]);
+
   const createRecipe = (title: string) => {
     const recipeId = nanoid(12);
     updateRecipe(recipeId, { title, steps: [] });
@@ -76,12 +88,10 @@ export const RecipesProvider = ({ children }: any) => {
 
   const editRecipe = (recipeId: string) => {
     setEditingRecipe(recipeId);
-    window.addEventListener("message", handleMessageFromRecipeEditorIFrame);
   };
 
   const closeRecipeEditor = () => {
     setEditingRecipe(null);
-    window.removeEventListener("message", handleMessageFromRecipeEditorIFrame);
   };
 
   const handleMessageFromRecipeEditorIFrame = (event: any) => {
