@@ -19,8 +19,9 @@ const MESSAGE_TYPES = {
 };
 
 export const RECIPE_EDITOR_URL =
-  "https://recipe-press.netlify.app/?embedded=true";
-export const RECIPE_EDITOR_DOMAIN = "https://recipe-press.netlify.app/";
+  "https://apothecarium.fourthievesvinegar.org/?embedded=true";
+export const RECIPE_EDITOR_DOMAIN =
+  "https://apothecarium.fourthievesvinegar.org";
 
 const RecipesContext = createContext<RecipesContextType>({
   closeRecipeEditor: () => {},
