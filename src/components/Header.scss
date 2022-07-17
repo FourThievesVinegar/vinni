@@ -1,3 +1,7 @@
+.application-header {
+  border-bottom: 1px solid white;
+}
+
 .vinni-section {
   display: flex;
   flex-direction: row;
@@ -24,10 +28,10 @@
   position: relative;
   max-width: 400px;
   margin: 0;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: bold;
   border: 2px solid #fff;
-  padding: 16px;
+  padding: 8px;
   border-radius: 16px;
   &:after {
     content: "";

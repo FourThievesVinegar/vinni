@@ -44,19 +44,22 @@ export const ProjectNotes = ({
               ))}
             </ul>
             {projectNotes.length === 0 && <p>No notes yet.</p>}
-            <textarea
-              value={newNoteText}
-              onChange={(e) => {
-                setNewNoteText(e.target.value);
-              }}
-            ></textarea>
-            <button
-              onClick={(e) => {
-                handleCreateNote(newNoteText);
-              }}
-            >
-              New note
-            </button>
+            <div className="new-note-form">
+              <textarea
+                value={newNoteText}
+                onChange={(e) => {
+                  setNewNoteText(e.target.value);
+                }}
+              ></textarea>
+              <button
+                disabled={newNoteText.length === 0}
+                onClick={(e) => {
+                  handleCreateNote(newNoteText);
+                }}
+              >
+                New note
+              </button>
+            </div>
           </Accordion.Content>
         </Accordion.Item>
       </Accordion.Root>

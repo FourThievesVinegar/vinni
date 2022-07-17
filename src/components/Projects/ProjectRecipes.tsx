@@ -42,6 +42,7 @@ export const ProjectRecipes = ({
             </Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content>
+            <h4>Available Recipes</h4>
             <ul className="project-recipes">
               {projectRecipes.map((recipeId) => (
                 <li key={recipeId}>
@@ -57,6 +58,8 @@ export const ProjectRecipes = ({
             </ul>
             {projectRecipes.length === 0 && <p>No recipes yet.</p>}
             <input
+              className="new-recipe-name"
+              placeholder="New Recipe Name"
               value={newRecipeTitle}
               onChange={(e) => {
                 setNewRecipeText(e.target.value);
@@ -67,7 +70,7 @@ export const ProjectRecipes = ({
                 handleCreateRecipe(newRecipeTitle);
               }}
             >
-              New recipe
+              Create New Recipe
             </button>
           </Accordion.Content>
         </Accordion.Item>

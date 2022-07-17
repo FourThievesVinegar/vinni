@@ -45,7 +45,7 @@ export const ProjectResearch = ({
                   // openChemhackticaDialog();
                 }}
               >
-                Open Chemhacktica
+                Open Chemhacktica ⧉
               </button>
             </div>
           </Accordion.Content>

@@ -7,7 +7,7 @@ import "./Header.scss";
 
 export const Header = () => {
   return (
-    <header>
+    <header className="application-header">
       <section className="vinni-section">
         <div className="brand-container">
           <h1 className="title-font">

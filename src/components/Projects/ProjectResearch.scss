@@ -19,6 +19,8 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 16px;
+  border-top: 1px solid white;
+  padding-top: 16px;
 }
 
 .new-compound-form,
@@ -26,13 +28,18 @@
   display: flex;
   flex-direction: column;
   width: 45%;
-  & > * {
+  & > input,
+  & > select {
     margin-bottom: 8px;
   }
 }
 
+.compound-forms-divider {
+  border-right: 1px solid white;
+}
+
 .projects-reactions-list {
-  li {
+  & > li {
     padding: 4px;
     margin-bottom: 4px;
     border: 1px solid white;
@@ -49,6 +56,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  ul {
+    padding-bottom: 12px;
+  }
 }
 
 .new-reaction-input-output-selection {
@@ -59,7 +69,8 @@
 }
 
 .new-reaction-form {
-  margin-bottom: 16px;
+  border-top: 1px solid white;
+  padding-top: 16px;
 }
 
 .reaction-inputs-list,

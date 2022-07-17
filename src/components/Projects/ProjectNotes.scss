@@ -3,3 +3,18 @@
   border: 1px solid #fff;
   padding: 8px;
 }
+
+.new-note-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-top: 1px solid white;
+  padding-top: 16px;
+
+  & > textarea {
+    margin-bottom: 16px;
+    width: 400px;
+    height: 100px;
+  }
+}

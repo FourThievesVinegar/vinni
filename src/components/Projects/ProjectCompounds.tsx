@@ -42,16 +42,18 @@ export const ProjectCompounds = ({
   return (
     <div className="project-compounds">
       <h4>Compounds</h4>
-      <ul>
-        {projectCompounds.map((compoundId) => {
-          const compound = compounds[compoundId];
-          return (
-            <li key={compound.smilesString}>
-              {compound.name} - {compound.smilesString}
-            </li>
-          );
-        })}
-      </ul>
+      {projectCompounds.length > 0 && (
+        <ul>
+          {projectCompounds.map((compoundId) => {
+            const compound = compounds[compoundId];
+            return (
+              <li key={compound.smilesString}>
+                {compound.name} - {compound.smilesString}
+              </li>
+            );
+          })}
+        </ul>
+      )}
       {projectCompounds.length === 0 && (
         <p>No compounds yet. You can find some in Chemhacktica</p>
       )}
@@ -72,43 +74,50 @@ export const ProjectCompounds = ({
             }}
           />
           <button
+            disabled={
+              newCompoundName.length === 0 ||
+              newCompoundSmilesString.length === 0
+            }
             onClick={(e) => {
               handleCreateCompound(newCompoundName, newCompoundSmilesString);
             }}
           >
-            Create Compound
+            Create New Compound
           </button>
         </div>
         {(nonProjectCompoundIds.length || compoundToAddFilterText) && (
-          <div className="add-compound-form">
-            <input
-              placeholder="Filter Compounds"
-              value={compoundToAddFilterText}
-              onChange={(e) => {
-                setCompoundToAddFilterText(e.target.value);
-              }}
-            />
-            <select
-              onChange={(e) => {
-                setCompoundToAdd(e.target.value);
-              }}
-            >
-              {nonProjectCompoundIds.map((compoundId) => {
-                return (
-                  <option value={compoundId}>
-                    {compounds[compoundId].name}
-                  </option>
-                );
-              })}
-            </select>
-            <button
-              onClick={(e) => {
-                handleAddCompound(compoundToAdd);
-              }}
-            >
-              Add to Project
-            </button>
-          </div>
+          <>
+            <div className="compound-forms-divider" />
+            <div className="add-compound-form">
+              <input
+                placeholder="Filter Compounds Dropdown"
+                value={compoundToAddFilterText}
+                onChange={(e) => {
+                  setCompoundToAddFilterText(e.target.value);
+                }}
+              />
+              <select
+                onChange={(e) => {
+                  setCompoundToAdd(e.target.value);
+                }}
+              >
+                {nonProjectCompoundIds.map((compoundId) => {
+                  return (
+                    <option value={compoundId}>
+                      {compounds[compoundId].name}
+                    </option>
+                  );
+                })}
+              </select>
+              <button
+                onClick={(e) => {
+                  handleAddCompound(compoundToAdd);
+                }}
+              >
+                Add to Project
+              </button>
+            </div>
+          </>
         )}
       </div>
     </div>
