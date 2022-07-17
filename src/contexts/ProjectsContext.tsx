@@ -1,4 +1,5 @@
 import { saveAs } from "file-saver";
+import { nanoid } from "nanoid";
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { NoteType } from "./NotesContext";
@@ -8,7 +9,7 @@ interface ProjectsContextType {
   addNoteToProject: (noteId: string, projectId: string) => void;
   addRecipeToProject: (recipeId: string, projectId: string) => void;
   addReactionToProject: (reactionId: string, projectId: string) => void;
-  createProject: (name: string) => string | null;
+  createProject: (name: string) => string;
   exportProject: (projectId: string) => void;
   projects?: any;
 }
@@ -73,7 +74,7 @@ const ProjectsContext = createContext<ProjectsContextType>({
   addNoteToProject: () => null,
   addRecipeToProject: () => null,
   addReactionToProject: () => null,
-  createProject: () => null,
+  createProject: () => "",
   exportProject: () => null,
   projects: {},
 });
@@ -108,12 +109,11 @@ export const ProjectsProvider = ({ children }: any) => {
   }, [projects]);
 
   const createProject = (name: string) => {
-    if (projects[name]) {
-      return "Project with that name already exists!";
-    }
+    const projectId = nanoid(12);
     const newProjects = {
       ...projects,
-      [name]: {
+      [projectId]: {
+        name,
         notes: [],
         compounds: [],
         pathways: [],
@@ -122,7 +122,7 @@ export const ProjectsProvider = ({ children }: any) => {
       },
     };
     setProjects(newProjects);
-    return null;
+    return projectId;
   };
 
   const exportProject = (projectId: string) => {

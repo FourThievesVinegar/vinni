@@ -4,7 +4,6 @@ import { useProjectsContext } from "../contexts/ProjectsContext";
 
 export const NewProject = () => {
   const [projectName, setProjectName] = useState("");
-  const [message, setMessage] = useState<string | null>(null);
   const { createProject } = useProjectsContext();
   let navigate = useNavigate();
 
@@ -13,6 +12,7 @@ export const NewProject = () => {
       <h1>Create a Project</h1>
       <label htmlFor="projectName">Name</label>{" "}
       <input
+        autoFocus
         onChange={(e) => {
           setProjectName(e.target.value);
         }}
@@ -21,16 +21,12 @@ export const NewProject = () => {
       <button
         disabled={projectName.length <= 0}
         onClick={() => {
-          const creationMessage = createProject(projectName);
-          if (!creationMessage) {
-            navigate(`/projects/${projectName}`);
-          }
-          setMessage(creationMessage);
+          const projectId = createProject(projectName);
+          navigate(`/projects/${projectId}`);
         }}
       >
         Create
       </button>
-      {message && <p>{message}</p>}
     </section>
   );
 };

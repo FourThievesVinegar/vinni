@@ -20,7 +20,7 @@ export const Project = () => {
     <>
       <header className="project-header">
         <h1>
-          <Link to="/projects">{"<"}</Link> Project: {projectId}
+          <Link to="/projects">{"<"}</Link> Project: {project.name || projectId}
         </h1>
         <button onClick={(e) => window.alert("Yeah I'm getting to it.")}>
           Export
