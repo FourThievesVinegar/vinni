@@ -51,9 +51,6 @@ const loadRecipes = () => {
 export const RecipesProvider = ({ children }: any) => {
   const [recipes, setRecipes] = useState<any>({});
   const [editingRecipe, setEditingRecipe] = useState<string | null>(null);
-  const [editorIFrame, setEditorIFrame] = useState<HTMLIFrameElement | null>(
-    null
-  );
 
   useEffect(() => {
     setRecipes(loadRecipes());
@@ -79,9 +76,6 @@ export const RecipesProvider = ({ children }: any) => {
 
   const editRecipe = (recipeId: string) => {
     setEditingRecipe(recipeId);
-    setEditorIFrame(
-      document.getElementById("recipe-editor-iframe") as HTMLIFrameElement
-    );
     window.addEventListener("message", handleMessageFromRecipeEditorIFrame);
   };
 
@@ -112,7 +106,9 @@ export const RecipesProvider = ({ children }: any) => {
       payload: editingRecipe ? recipes[editingRecipe] : {},
     };
     console.log("SENDING RECIPE TO IFRAME", message);
-    editorIFrame?.contentWindow?.postMessage(message, "*"); //TODO: This is insecure - add allow-list once domains are set.
+    (
+      document.getElementById("recipe-editor-iframe") as HTMLIFrameElement
+    )?.contentWindow?.postMessage(message, "*"); //TODO: This is insecure - add allow-list once domains are set.
   };
 
   return (
