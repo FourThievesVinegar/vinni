@@ -6,7 +6,7 @@ import { ProjectResearch } from "./Projects/ProjectResearch";
 
 export const Project = () => {
   const { projectId } = useParams();
-  const { projects } = useProjectsContext();
+  const { projects, exportProject } = useProjectsContext();
   let navigate = useNavigate();
 
   if (!projectId) {
@@ -16,15 +16,17 @@ export const Project = () => {
 
   const project = projects[projectId];
 
+  if (!project) {
+    return null;
+  }
+
   return (
     <>
       <header className="project-header">
         <h1>
           <Link to="/projects">{"<"}</Link> Project: {project.name || projectId}
         </h1>
-        <button onClick={(e) => window.alert("Yeah I'm getting to it.")}>
-          Export
-        </button>
+        <button onClick={(e) => exportProject(projectId)}>Export</button>
       </header>
       {project && (
         <>

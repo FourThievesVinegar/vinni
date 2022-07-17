@@ -2,6 +2,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
 interface CompoundsContextType {
+  addCompound: (compoundId: string, compound: any) => void;
+  addCompounds: (compounds: any) => void;
+  addReaction: (reactionId: string, reaction: any) => void;
+  addReactions: (reactions: any) => void;
   browsingChemhacktica: boolean;
   closeChemhackticaDialog: () => void;
   createCompound: (name: string, smilesString: string) => string;
@@ -18,6 +22,10 @@ export interface CompoundType {
 export const CHEMHACKTICA_URL = "https://synth.fourthievesvinegar.org/";
 
 const CompoundsContext = createContext<CompoundsContextType>({
+  addCompound: (compoundId: string, compound: any) => {},
+  addCompounds: (compounds: any) => {},
+  addReaction: (reactionId: string, reaction: any) => {},
+  addReactions: (reactions: any) => {},
   browsingChemhacktica: false,
   closeChemhackticaDialog: () => {},
   createCompound: (name: string, smilesString: string) => "",
@@ -61,7 +69,7 @@ export const CompoundsProvider = ({ children }: any) => {
 
   useEffect(() => {
     setCompounds(loadCompounds());
-    setReactions(loadReactions);
+    setReactions(loadReactions());
   }, []);
 
   useEffect(() => {
@@ -92,6 +100,24 @@ export const CompoundsProvider = ({ children }: any) => {
     return reactionId;
   };
 
+  const addCompound = (compoundId: string, compound: any) => {
+    const newCompounds = { ...compounds, [compoundId]: compound };
+    setCompounds(newCompounds);
+  };
+
+  const addCompounds = (newCompounds: any) => {
+    setCompounds({ ...compounds, ...newCompounds });
+  };
+
+  const addReaction = (reactionId: string, reaction: any) => {
+    const newReactions = { ...reactions, [reactionId]: reaction };
+    setCompounds(newReactions);
+  };
+
+  const addReactions = (newReactions: any) => {
+    setReactions({ ...reactions, ...newReactions });
+  };
+
   const openChemhackticaDialog = () => {
     setBrowsingChemhacktica(true);
   };
@@ -103,6 +129,10 @@ export const CompoundsProvider = ({ children }: any) => {
   return (
     <CompoundsContext.Provider
       value={{
+        addCompound,
+        addCompounds,
+        addReaction,
+        addReactions,
         browsingChemhacktica,
         closeChemhackticaDialog,
         compounds,

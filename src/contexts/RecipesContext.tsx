@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
 interface RecipesContextType {
+  addRecipe: (recipeId: string, recipe: any) => void;
+  addRecipes: (recipes: any) => void;
   closeRecipeEditor: () => void;
   createRecipe: (title: string) => string;
   editingRecipe: string | null;
@@ -24,6 +26,8 @@ export const RECIPE_EDITOR_DOMAIN =
   "https://apothecarium.fourthievesvinegar.org";
 
 const RecipesContext = createContext<RecipesContextType>({
+  addRecipe: (recipeId: string, recipe: any) => {},
+  addRecipes: (recipes: any) => {},
   closeRecipeEditor: () => {},
   createRecipe: (text: string) => "",
   editingRecipe: null,
@@ -72,6 +76,14 @@ export const RecipesProvider = ({ children }: any) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editingRecipe]);
+
+  const addRecipe = (recipeId: string, recipe: any) => {
+    updateRecipe(recipeId, recipe);
+  };
+
+  const addRecipes = (newRecipes: any) => {
+    setRecipes({ ...recipes, ...newRecipes });
+  };
 
   const createRecipe = (title: string) => {
     const recipeId = nanoid(12);
@@ -129,6 +141,8 @@ export const RecipesProvider = ({ children }: any) => {
   return (
     <RecipesContext.Provider
       value={{
+        addRecipe,
+        addRecipes,
         closeRecipeEditor,
         createRecipe,
         editingRecipe,

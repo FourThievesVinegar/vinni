@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
 interface NotesContextType {
+  addNote: (noteId: string, note: any) => void;
+  addNotes: (notes: any) => void;
   createNote: (name: string) => string;
   notes?: any;
 }
@@ -11,6 +13,8 @@ export interface NoteType {
 }
 
 const NotesContext = createContext<NotesContextType>({
+  addNote: (noteId: string, note: any) => {},
+  addNotes: (notes: any) => {},
   createNote: (text: string) => "",
   notes: {},
 });
@@ -44,6 +48,18 @@ export const NotesProvider = ({ children }: any) => {
     saveNotes(notes);
   }, [notes]);
 
+  const addNote = (noteId: string, note: any) => {
+    const newNotes = {
+      ...notes,
+      [noteId]: note,
+    };
+    setNotes(newNotes);
+  };
+
+  const addNotes = (newNotes: any) => {
+    setNotes({ ...notes, ...newNotes });
+  };
+
   const createNote = (text: string) => {
     const noteId = nanoid(12);
     const newNotes = {
@@ -55,7 +71,7 @@ export const NotesProvider = ({ children }: any) => {
   };
 
   return (
-    <NotesContext.Provider value={{ createNote, notes }}>
+    <NotesContext.Provider value={{ addNote, addNotes, createNote, notes }}>
       {children}
     </NotesContext.Provider>
   );

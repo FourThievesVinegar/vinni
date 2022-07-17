@@ -66,6 +66,7 @@ export const ProjectRecipes = ({
               }}
             />
             <button
+              disabled={newRecipeTitle.length === 0}
               onClick={(e) => {
                 handleCreateRecipe(newRecipeTitle);
               }}

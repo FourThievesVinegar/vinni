@@ -5,6 +5,19 @@
   padding: 16px;
 }
 
+.new-project-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.import-project-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+  align-items: flex-start;
+}
+
 .projects-list {
   li {
     margin: 16px;
