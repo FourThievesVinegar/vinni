@@ -165,7 +165,7 @@ export const ProjectsProvider = ({ children }: any) => {
 
     saveAs(
       new Blob([JSON.stringify(exportObject)], { type: "application/json" }),
-      `${projects[projectId].name}-${projectId}.json`
+      `${projects[projectId].name}-${projectId}.4tv`
     ); // Export JSON file of the project
   };
 
