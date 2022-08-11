@@ -47,6 +47,7 @@ export const ProjectRecipes = ({
               {projectRecipes.map((recipeId) => (
                 <li key={recipeId}>
                   <button
+                    className="open-recipe-button"
                     onClick={() => {
                       handleEditRecipe(recipeId);
                     }}

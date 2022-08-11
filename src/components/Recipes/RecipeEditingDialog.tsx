@@ -26,7 +26,8 @@ export const RecipeEditorDialog = () => {
             style={{
               backgroundImage: `url(${loaderSmashy})`,
               backgroundPosition: "center",
-              backgroundRepeat: "none",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "33%",
             }}
           >
             {editingRecipe && (
