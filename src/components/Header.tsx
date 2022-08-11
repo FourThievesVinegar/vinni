@@ -17,8 +17,7 @@ export const Header = () => {
         </div>
         <div className="speech-container">
           <p className="speech-bubble">
-            It looks like you could use a guide to DIY medicine. Maybe I can
-            help.
+            It looks like you're trying to survive capitalism. Maybe I can help.
           </p>
         </div>
         <div className="vinni-container">
