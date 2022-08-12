@@ -23,10 +23,6 @@
   display: flex;
   flex-direction: column;
   width: 45%;
-  & > input,
-  & > select {
-    margin-bottom: 8px;
-  }
 }
 
 .compound-forms-divider {

@@ -1,3 +1,8 @@
+:root {
+  --bright-yellow: #d9c925;
+  --dim-yellow: #d9c9256e;
+}
+
 main {
   margin: 0 auto;
   text-align: center;
@@ -6,4 +11,18 @@ main {
 ul {
   padding: 0;
   list-style-type: none;
+}
+
+a {
+  color: var(--bright-yellow);
+}
+
+a:visited {
+  color: var(--bright-yellow);
+}
+
+input[type="file"],
+button {
+  background-color: var(--bright-yellow);
+  color: #000;
 }

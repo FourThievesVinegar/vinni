@@ -19,7 +19,7 @@ export const RecipeEditorDialog = () => {
         <Dialog.Content className="dialog-content">
           <div className="dialog-header">
             <Dialog.Title>Editing {recipeTitle}</Dialog.Title>{" "}
-            <Dialog.Close onClick={() => closeRecipeEditor()}>X</Dialog.Close>
+            <Dialog.Close onClick={() => closeRecipeEditor()}>×</Dialog.Close>
           </div>
           <div
             className="dialog-body"
