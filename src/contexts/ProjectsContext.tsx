@@ -119,7 +119,7 @@ export const ProjectsProvider = ({ children }: any) => {
     } else {
       importProject(testProject)
     }
-    /* tslint:disable-next-line */
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
