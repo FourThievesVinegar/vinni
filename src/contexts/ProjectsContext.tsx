@@ -117,7 +117,6 @@ export const ProjectsProvider = ({ children }: any) => {
     if (savedProjects && Object.keys(savedProjects).length > 0) {
       setProjects(savedProjects);
     } else {
-      console.log("Importing", testProject)
       importProject(testProject)
     }
   }, []);
@@ -183,8 +182,6 @@ export const ProjectsProvider = ({ children }: any) => {
     addNotes(importObject.notes);
     addReactions(importObject.reactions);
     addRecipes(importObject.recipes);
-
-    console.log("inportProject", importObject)
 
     setProjects({ ...projects, ...importObject.projects });
   };
