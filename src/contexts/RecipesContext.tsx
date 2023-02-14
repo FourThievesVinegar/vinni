@@ -59,9 +59,9 @@ export const RecipesProvider = ({ children }: any) => {
 
   useEffect(() => {
     if (Object.keys(recipes).length === 0) {
-      console.log("loadRecipes", recipes)
       setRecipes({ ...recipes, ...loadRecipes() });
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
