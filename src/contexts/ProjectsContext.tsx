@@ -117,7 +117,10 @@ export const ProjectsProvider = ({ children }: any) => {
     if (savedProjects && Object.keys(savedProjects).length > 0) {
       setProjects(savedProjects);
     } else {
-      importProject(testProject)
+      window.setTimeout(() => {
+        // Let the recipes context initialize first
+        importProject(testProject)
+      }, 100)
     }
     // eslint-disable-next-line
   }, []);

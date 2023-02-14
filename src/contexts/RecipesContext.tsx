@@ -26,12 +26,12 @@ export const RECIPE_EDITOR_DOMAIN =
   "https://apothecarium.fourthievesvinegar.org";
 
 const RecipesContext = createContext<RecipesContextType>({
-  addRecipe: (recipeId: string, recipe: any) => {},
-  addRecipes: (recipes: any) => {},
-  closeRecipeEditor: () => {},
+  addRecipe: (recipeId: string, recipe: any) => { },
+  addRecipes: (recipes: any) => { },
+  closeRecipeEditor: () => { },
   createRecipe: (text: string) => "",
   editingRecipe: null,
-  editRecipe: (title: string) => {},
+  editRecipe: (title: string) => { },
   recipes: {},
 });
 
@@ -58,10 +58,15 @@ export const RecipesProvider = ({ children }: any) => {
   const [editingRecipe, setEditingRecipe] = useState<string | null>(null);
 
   useEffect(() => {
-    setRecipes(loadRecipes());
+    if (Object.keys(recipes).length === 0) {
+      setRecipes({ ...recipes, ...loadRecipes() });
+    }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
+    console.log("recipes", recipes)
+
     saveRecipes(recipes);
   }, [recipes]);
 
@@ -74,6 +79,11 @@ export const RecipesProvider = ({ children }: any) => {
         handleMessageFromRecipeEditorIFrame
       );
     }
+    return () => {
+      window.removeEventListener(
+        "message",
+        handleMessageFromRecipeEditorIFrame)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editingRecipe]);
 
@@ -82,6 +92,7 @@ export const RecipesProvider = ({ children }: any) => {
   };
 
   const addRecipes = (newRecipes: any) => {
+    console.log('addRecipes', newRecipes)
     setRecipes({ ...recipes, ...newRecipes });
   };
 
