@@ -34,7 +34,7 @@ export const ProjectRecipes = ({
 
   return (
     <>
-      <Accordion.Root type="multiple" className="projects-page-accordion">
+      <Accordion.Root type="multiple" className="projects-page-accordion" defaultValue={["recipes"]}>
         <Accordion.Item value="recipes">
           <Accordion.Header>
             <Accordion.Trigger>
@@ -44,7 +44,7 @@ export const ProjectRecipes = ({
           <Accordion.Content>
             <h4>Available Recipes</h4>
             <ul className="project-recipes">
-              {projectRecipes.map((recipeId) => (
+              {projectRecipes?.map((recipeId) => (
                 <li key={recipeId}>
                   <button
                     className="open-recipe-button"

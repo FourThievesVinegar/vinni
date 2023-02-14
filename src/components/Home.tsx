@@ -26,10 +26,10 @@ export const Home = () => {
         <h2>
           <Link to="/projects">Projects</Link>
         </h2>
-        <h2>Research</h2>
+        {/* <h2>Research</h2>
         <h2>Compounds</h2>
         <h2>Pathways</h2>
-        <h2>Recipes</h2>
+  <h2>Recipes</h2> */}
       </section>
     </section>
   );

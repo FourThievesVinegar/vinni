@@ -30,16 +30,16 @@ export const Project = () => {
       </header>
       {project && (
         <>
+          <ProjectRecipes
+            projectRecipes={project["recipes"]}
+            projectId={projectId}
+          />
           <ProjectResearch
             projectCompounds={project["compounds"]}
             projectId={projectId}
             projectReactions={project["reactions"]}
           />
-          <ProjectRecipes
-            projectRecipes={project["recipes"]}
-            projectId={projectId}
-          />
-          <ProjectNotes projectNotes={project["notes"]} projectId={projectId} />
+          {/* <ProjectNotes projectNotes={project["notes"]} projectId={projectId} />*/}
         </>
       )}
     </>
