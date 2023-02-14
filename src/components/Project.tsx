@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useProjectsContext } from "../contexts/ProjectsContext";
-import { ProjectNotes } from "./Projects/ProjectNotes";
+//import { ProjectNotes } from "./Projects/ProjectNotes";
 import { ProjectRecipes } from "./Projects/ProjectRecipes";
 import { ProjectResearch } from "./Projects/ProjectResearch";
 

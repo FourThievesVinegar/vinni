@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import * as Accordion from "@radix-ui/react-accordion";
+// import * as Accordion from "@radix-ui/react-accordion";
 
 import { useProjectsContext } from "../contexts/ProjectsContext";
 
