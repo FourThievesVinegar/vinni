@@ -52,7 +52,7 @@ export const ProjectRecipes = ({
                       handleEditRecipe(recipeId);
                     }}
                   >
-                    {recipes[recipeId].title}
+                    {recipes[recipeId]?.title}
                   </button>
                 </li>
               ))}
