@@ -1,3 +1,12 @@
+.project-research-tools {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-bottom: 1px solid white;
+}
+
 .project-research-data {
   display: flex;
   flex-direction: row;
@@ -21,7 +30,7 @@
 }
 
 .projects-reactions-list {
-  & > li {
+  &>li {
     padding: 4px;
     margin-bottom: 4px;
     border: 1px solid white;
@@ -38,6 +47,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+
   ul {
     padding-bottom: 12px;
   }

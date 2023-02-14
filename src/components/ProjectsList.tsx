@@ -53,7 +53,7 @@ export const ProjectsList = () => {
             />
           </div>
         </div>
-        <Accordion.Root type="multiple" className="projects-list-accordion">
+        {/* <Accordion.Root type="multiple" className="projects-list-accordion">
           <Accordion.Item value="notes">
             <Accordion.Header>
               <Accordion.Trigger>
@@ -73,7 +73,7 @@ export const ProjectsList = () => {
               </div>
             </Accordion.Content>
           </Accordion.Item>
-        </Accordion.Root>
+        </Accordion.Root> */}
       </div>
     </>
   );

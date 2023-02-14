@@ -6,6 +6,8 @@ import { useCompoundsContext } from "./CompoundsContext";
 import { NoteType, useNotesContext } from "./NotesContext";
 import { useRecipesContext } from "./RecipesContext";
 
+import testProject from "../data/microlabTestProject.json"
+
 interface ProjectsContextType {
   addCompoundToProject: (noteId: string, compoundId: string) => void;
   addNoteToProject: (noteId: string, projectId: string) => void;
@@ -98,7 +100,8 @@ const saveProjects = (projects: { string: ProjectType }) => {
 };
 
 const loadProjects = () => {
-  return JSON.parse(localStorage.getItem("vinni-projects") || "{}");
+  const projects = JSON.parse(localStorage.getItem("vinni-projects") || "null")
+  return projects;
 };
 
 export const ProjectsProvider = ({ children }: any) => {
@@ -110,18 +113,24 @@ export const ProjectsProvider = ({ children }: any) => {
   const { recipes, addRecipes } = useRecipesContext();
 
   useEffect(() => {
-    setProjects(loadProjects());
+    const savedProjects = loadProjects()
+    if (savedProjects && Object.keys(savedProjects).length > 0) {
+      setProjects(savedProjects);
+    } else {
+      console.log("Importing", testProject)
+      importProject(testProject)
+    }
   }, []);
 
   useEffect(() => {
     saveProjects(projects);
   }, [projects]);
 
-  const createProject = (name: string) => {
+  const createProject = (name: string, project: null | Object = null) => {
     const projectId = nanoid(12);
     const newProjects = {
       ...projects,
-      [projectId]: {
+      [projectId]: project || {
         name,
         notes: [],
         compounds: [],
@@ -174,6 +183,8 @@ export const ProjectsProvider = ({ children }: any) => {
     addNotes(importObject.notes);
     addReactions(importObject.reactions);
     addRecipes(importObject.recipes);
+
+    console.log("inportProject", importObject)
 
     setProjects({ ...projects, ...importObject.projects });
   };
