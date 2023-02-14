@@ -118,7 +118,8 @@ export const ProjectsProvider = ({ children }: any) => {
       setProjects(savedProjects);
     } else {
       importProject(testProject)
-    } /* tslint:disable-next-line */
+    }
+    /* tslint:disable-next-line */
   }, []);
 
   useEffect(() => {
