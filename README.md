@@ -1,6 +1,8 @@
 # Vinni
 
-Your guide to the Four Thieves Vinegar Microlab Suite
+Your guide to the Four Thieves Vinegar Microlab Suite.
+
+This project is in very early alpha and does very little currently. You can see it here: https://vinni.fourthievesvinegar.org/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
