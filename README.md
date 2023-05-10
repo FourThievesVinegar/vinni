@@ -4,6 +4,8 @@ Your guide to the Four Thieves Vinegar Microlab Suite.
 
 This project is in very early alpha and does very little currently. You can see it here: https://vinni.fourthievesvinegar.org/
 
+There is a happy path through a test project to a test recipe that you can edit or export to put on the microlab.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
