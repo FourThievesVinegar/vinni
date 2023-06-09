@@ -30,7 +30,7 @@ export const ProjectCompounds = ({
 
   useEffect(() => {
     setCompoundToAdd(nonProjectCompoundIds[0]);
-  }, [projectCompounds])
+  }, [projectCompounds, nonProjectCompoundIds])
 
   function handleCreateCompound(name: string, smilesString: string) {
     if (name.length === 0 || smilesString.length === 0) return;
