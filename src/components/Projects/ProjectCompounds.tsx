@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCompoundsContext } from "../../contexts/CompoundsContext";
 import { useProjectsContext } from "../../contexts/ProjectsContext";
 
@@ -20,9 +20,19 @@ export const ProjectCompounds = ({
   const [compoundToAdd, setCompoundToAdd] = useState("");
 
   const { compounds, createCompound } = useCompoundsContext();
-  const { addCompoundToProject } = useProjectsContext();
+  const { addCompoundToProject, removeCompoundFromProject } = useProjectsContext();
 
-  const handleCreateCompound = (name: string, smilesString: string) => {
+  const nonProjectCompoundIds = Object.keys(compounds).filter(
+    (compoundId) =>
+      !projectCompounds.includes(compoundId) &&
+      compounds[compoundId].name.includes(compoundToAddFilterText)
+  );
+
+  useEffect(() => {
+    setCompoundToAdd(nonProjectCompoundIds[0]);
+  }, [projectCompounds, nonProjectCompoundIds])
+
+  function handleCreateCompound(name: string, smilesString: string) {
     if (name.length === 0 || smilesString.length === 0) return;
     const compoundId = createCompound(name, smilesString);
     addCompoundToProject(compoundId, projectId);
@@ -30,16 +40,17 @@ export const ProjectCompounds = ({
     setNewCompoundSmilesString("");
   };
 
-  const handleAddCompound = (compoundId: string) => {
+  function handleRemoveCompound(compoundId: string) {
+    if (!compoundId) return;
+    removeCompoundFromProject(compoundId, projectId);
+  };
+
+  function handleAddCompound(compoundId: string) {
     if (!compoundId) return;
     addCompoundToProject(compoundId, projectId);
   };
 
-  const nonProjectCompoundIds = Object.keys(compounds).filter(
-    (compoundId) =>
-      !projectCompounds.includes(compoundId) &&
-      compounds[compoundId].name.includes(compoundToAddFilterText)
-  );
+
 
   return (
     <div className="project-compounds">
@@ -49,8 +60,16 @@ export const ProjectCompounds = ({
           {projectCompounds.map((compoundId) => {
             const compound = compounds[compoundId];
             return (
-              <li key={compound.smilesString}>
+              <li key={compound.smilesString}> {/* TURN ME INTO A COMPONENT! */}
                 {compound.name} - {compound.smilesString}
+                <button
+
+                  onClick={(e) => {
+                    handleRemoveCompound(compoundId);
+                  }}
+                >
+                  X
+                </button>
               </li>
             );
           })}

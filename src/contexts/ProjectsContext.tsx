@@ -10,6 +10,7 @@ import testProject from "../data/microlabTestProject.json"
 
 interface ProjectsContextType {
   addCompoundToProject: (noteId: string, compoundId: string) => void;
+  removeCompoundFromProject: (compoundId: string, projectId: string) => void;
   addNoteToProject: (noteId: string, projectId: string) => void;
   addRecipeToProject: (recipeId: string, projectId: string) => void;
   addReactionToProject: (reactionId: string, projectId: string) => void;
@@ -76,6 +77,7 @@ interface StepOptionType {
 
 const ProjectsContext = createContext<ProjectsContextType>({
   addCompoundToProject: () => null,
+  removeCompoundFromProject: () => null,
   addNoteToProject: () => null,
   addRecipeToProject: () => null,
   addReactionToProject: () => null,
@@ -190,8 +192,8 @@ export const ProjectsProvider = ({ children }: any) => {
     setProjects({ ...projects, ...importObject.projects });
   };
 
-  const addCompoundToProject = (compoundId: string, projectId: string) => {
-    let newCompounds = projects[projectId]["compounds"];
+  function addCompoundToProject(compoundId: string, projectId: string) {
+    let newCompounds = [...projects[projectId]["compounds"]];
     newCompounds.push(compoundId);
     const newProjects = {
       ...projects,
@@ -201,8 +203,18 @@ export const ProjectsProvider = ({ children }: any) => {
     setProjects(newProjects);
   };
 
-  const addNoteToProject = (noteId: string, projectId: string) => {
-    let newNotes = projects[projectId]["notes"];
+  function removeCompoundFromProject(compoundId: string, projectId: string) {
+    let newCompounds = [...projects[projectId]["compounds"]];
+    newCompounds.splice(newCompounds.indexOf(compoundId), 1);
+    const newProjects = {
+      ...projects,
+      [projectId]: { ...projects[projectId], compounds: [...newCompounds] },
+    };
+    setProjects(newProjects);
+  }
+
+  function addNoteToProject(noteId: string, projectId: string) {
+    let newNotes = [...projects[projectId]["notes"]];
     newNotes.push(noteId);
     const newProjects = {
       ...projects,
@@ -212,7 +224,7 @@ export const ProjectsProvider = ({ children }: any) => {
     setProjects(newProjects);
   };
 
-  const addReactionToProject = (reactionId: string, projectId: string) => {
+  function addReactionToProject(reactionId: string, projectId: string) {
     let newReactions = projects[projectId]["reactions"];
     newReactions.push(reactionId);
     const newProjects = {
@@ -223,7 +235,7 @@ export const ProjectsProvider = ({ children }: any) => {
     setProjects(newProjects);
   };
 
-  const addRecipeToProject = (recipeId: string, projectId: string) => {
+  function addRecipeToProject(recipeId: string, projectId: string) {
     let newRecipes = projects[projectId]["recipes"];
     newRecipes.push(recipeId);
     const newProjects = {
@@ -238,6 +250,7 @@ export const ProjectsProvider = ({ children }: any) => {
     <ProjectsContext.Provider
       value={{
         addCompoundToProject,
+        removeCompoundFromProject,
         addNoteToProject,
         addReactionToProject,
         addRecipeToProject,
