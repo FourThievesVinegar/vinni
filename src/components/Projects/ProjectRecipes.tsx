@@ -38,11 +38,11 @@ export const ProjectRecipes = ({
         <Accordion.Item value="recipes">
           <Accordion.Header>
             <Accordion.Trigger>
-              <h2>Recipes</h2>
+              <h2 className="title-font">Recipes</h2>
             </Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content>
-            <h4>Available Recipes</h4>
+            <h4>Open Recipe:</h4>
             <ul className="project-recipes">
               {projectRecipes?.map((recipeId) => (
                 <li key={recipeId}>

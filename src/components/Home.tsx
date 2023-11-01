@@ -22,7 +22,7 @@ export const Home = () => {
         </div>
       </section>
       <section>
-        <h1>Home</h1>
+        <h1 className="title-font">Home</h1>
         <h2>
           <Link to="/projects">Projects</Link>
         </h2>

@@ -26,7 +26,7 @@ export const Project = () => {
         <h1>
           <Link to="/projects">{"<"}</Link> Project: {project.name || projectId}
         </h1>
-        <button onClick={(e) => exportProject(projectId)}>Export</button>
+        <button onClick={(e) => exportProject(projectId)}>Export Project</button>
       </header>
       {project && (
         <>
