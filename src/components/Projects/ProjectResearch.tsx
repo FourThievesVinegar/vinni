@@ -23,7 +23,7 @@ export const ProjectResearch = ({
         <Accordion.Item value="research">
           <Accordion.Header>
             <Accordion.Trigger>
-              <h2>Research</h2>
+              <h2 className="title-font">Research</h2>
             </Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Content>

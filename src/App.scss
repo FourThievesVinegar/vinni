@@ -26,3 +26,28 @@ button {
   background-color: var(--bright-yellow);
   color: #000;
 }
+
+button {
+  cursor: pointer;
+  position: relative;
+
+  &[aria-expanded="true"]:after {
+    content: "-";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 36px;
+    height: 44px;
+  }
+
+  &[aria-expanded="false"]:after {
+    content: "+";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 36px;
+    height: 44px;
+  }
+}
