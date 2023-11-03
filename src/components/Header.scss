@@ -7,16 +7,19 @@
   flex-direction: row;
   justify-content: center;
   padding: 8px;
-  height: 10vh;
+  height: 80px;
 }
+
 .brand-container.brand-container {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--dim-yellow);
+
   .title-font {
     font-size: 32px;
   }
+
   a {
     display: block;
     color: #000;
@@ -27,8 +30,10 @@
     margin-top: -2px;
   }
 }
+
 .logo-container {
   width: 100px;
+
   img {
     max-width: 100%;
   }
@@ -38,11 +43,13 @@
   width: 90px;
   margin-right: 32px;
 }
+
 .speech-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .speech-bubble {
   position: relative;
   max-width: 200px;
@@ -52,6 +59,7 @@
   border-radius: 16px;
   background-color: var(--bright-yellow);
   color: black;
+
   &:after {
     content: "";
     position: absolute;
@@ -64,12 +72,14 @@
     border-left: 30px solid var(--bright-yellow);
   }
 }
+
 .vinni-container {
   position: relative;
   justify-self: end;
   width: 90px;
   margin-left: 32px;
 }
+
 .vinni-background {
   position: absolute;
   height: 100%;
@@ -77,41 +87,41 @@
   left: 0;
   z-index: -1;
 }
+
 .vinni-head {
   position: absolute;
   width: 100%;
-  height: 100%;
-  left: 0;
-
-  /* With background */
-  height: 60px;
-  top: 20px;
+  height: 66%;
+  left: 2px;
+  top: 18px;
 }
+
 .vinni-jaw {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 66%;
   left: 0;
   transform: rotate(0deg);
   transition: transform 0.2s ease;
   z-index: -1;
-
-  /* With background */
-  height: 60px;
-  top: 21px;
+  top: 19px;
 }
+
 .vinni-jaw.talking {
   animation-name: example;
   animation-duration: 0.5s;
   animation-iteration-count: infinite;
 }
+
 @keyframes example {
   0% {
     transform: rotate(0deg);
   }
+
   50% {
     transform: rotate(-4deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
