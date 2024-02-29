@@ -38,19 +38,19 @@
                     "baseTask": "humanTask"
                 },
                 {
-                    "message": "Testing Pump A",
+                    "message": "Testing Pump X",
                     "parameters": {
                         "volume": 100,
-                        "pump": "A"
+                        "pump": "X"
                     },
                     "done": false,
                     "baseTask": "pump",
                     "next": 3
                 },
                 {
-                    "message": "Testing Pump B",
+                    "message": "Testing Pump Y",
                     "parameters": {
-                        "pump": "B",
+                        "pump": "Y",
                         "volume": 100
                     },
                     "done": false,
@@ -58,9 +58,9 @@
                     "next": 4
                 },
                 {
-                    "message": "Testing Pump C",
+                    "message": "Testing Pump Z",
                     "parameters": {
-                        "pump": "C",
+                        "pump": "Z",
                         "volume": 100
                     },
                     "done": false,
