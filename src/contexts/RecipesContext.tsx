@@ -20,10 +20,10 @@ const MESSAGE_TYPES = {
   RECIPE_REQUEST: "recipe request",
 };
 
-export const RECIPE_EDITOR_URL =
-  "https://apothecarium.fourthievesvinegar.org/?embedded=true";
 export const RECIPE_EDITOR_DOMAIN =
-  "https://apothecarium.fourthievesvinegar.org";
+  "https://recipe-press.fourthievesvinegar.org/";
+export const RECIPE_EDITOR_URL =
+  `${RECIPE_EDITOR_DOMAIN}?embedded=true`;
 
 const RecipesContext = createContext<RecipesContextType>({
   addRecipe: (recipeId: string, recipe: any) => { },

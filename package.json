@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@radix-ui/react-accordion": "^0.1.6",
-    "@radix-ui/react-dialog": "^0.1.7",
+    "@radix-ui/react-accordion": "^1.1.2",
+    "@radix-ui/react-dialog": "^1.0.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
+    "prettier": "^3.3.2",
     "sass": "^1.53.0"
   }
 }
