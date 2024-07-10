@@ -13,14 +13,16 @@ export const ProjectsList = () => {
 
   return (
     <>
-      <h2 className="title-font">Microlab Projects</h2>
+      <h2 className="title-font">Projects</h2>
 
       <ul className="projects-list">
         {projects &&
           Object.keys(projects).map((key) => {
             return (
               <li className="projects-list-project" key={key}>
-                <h3><Link to={`/projects/${key}`}>{projects[key].name}</Link></h3>
+                <h3>
+                  <Link to={`/projects/${key}`}>{projects[key].name}</Link>
+                </h3>
               </li>
             );
           })}

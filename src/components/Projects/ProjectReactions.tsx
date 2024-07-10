@@ -82,92 +82,98 @@ export const ProjectReactions = ({
       {projectReactions.length === 0 && (
         <p>No reactions yet. You can find some in Chemhacktica</p>
       )}
-      <div className="new-reaction-form">
-        <div className="new-reaction-name-selection">
-          <input
-            value={newReactionName}
-            placeholder={"New reaction name"}
-            onChange={(e) => {
-              setNewReactionName(e.target.value);
-            }}
-          />
+      {projectCompounds.length > 0 ? (
+        <>
+          <div className="new-reaction-form">
+            <div className="new-reaction-name-selection">
+              <input
+                value={newReactionName}
+                placeholder={"New reaction name"}
+                onChange={(e) => {
+                  setNewReactionName(e.target.value);
+                }}
+              />
 
-          <button
-            disabled={
-              newReactionName.length === 0 ||
-              newReactionInputs.length === 0 ||
-              newReactionOutputs.length === 0
-            }
-            onClick={(e) => {
-              handleCreateReaction(
-                newReactionName,
-                newReactionInputs,
-                newReactionOutputs
-              );
-            }}
-          >
-            Create New Reaction
-          </button>
-        </div>
-        <div className="new-reaction-input-output-selection">
-          <div className="reaction-inputs-list-container">
-            <h5>Inputs</h5>
-            <ul className="reaction-inputs-list">
-              {projectCompounds.map((compoundId: string) => {
-                const compoundData = compounds[compoundId];
-                return (
-                  <li key={compoundData.smilesString}>
-                    <input
-                      type="checkbox"
-                      checked={newReactionInputs.includes(compoundId)}
-                      onChange={(e) => {
-                        let newNewReactionInputs = [...newReactionInputs];
-                        if (e.target.checked) {
-                          newNewReactionInputs.push(compoundId);
-                        } else {
-                          let valueIndex =
-                            newNewReactionInputs.indexOf(compoundId);
-                          newNewReactionInputs.splice(valueIndex, 1);
-                        }
-                        setNewReactionInputs(newNewReactionInputs);
-                      }}
-                    />
-                    {compoundData.name}
-                  </li>
-                );
-              })}
-            </ul>
+              <button
+                disabled={
+                  newReactionName.length === 0 ||
+                  newReactionInputs.length === 0 ||
+                  newReactionOutputs.length === 0
+                }
+                onClick={(e) => {
+                  handleCreateReaction(
+                    newReactionName,
+                    newReactionInputs,
+                    newReactionOutputs
+                  );
+                }}
+              >
+                Create New Reaction
+              </button>
+            </div>
+            <div className="new-reaction-input-output-selection">
+              <div className="reaction-inputs-list-container">
+                <h5>Inputs</h5>
+                <ul className="reaction-inputs-list">
+                  {projectCompounds?.map((compoundId: string) => {
+                    const compoundData = compounds[compoundId];
+                    return (
+                      <li key={compoundData.smilesString}>
+                        <input
+                          type="checkbox"
+                          checked={newReactionInputs.includes(compoundId)}
+                          onChange={(e) => {
+                            let newNewReactionInputs = [...newReactionInputs];
+                            if (e.target.checked) {
+                              newNewReactionInputs.push(compoundId);
+                            } else {
+                              let valueIndex =
+                                newNewReactionInputs.indexOf(compoundId);
+                              newNewReactionInputs.splice(valueIndex, 1);
+                            }
+                            setNewReactionInputs(newNewReactionInputs);
+                          }}
+                        />
+                        {compoundData.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div className="reaction-outputs-list-container">
+                <h5>Outputs</h5>
+                <ul className="reaction-outputs-list">
+                  {projectCompounds.map((compoundId: string) => {
+                    const compoundData = compounds[compoundId];
+                    return (
+                      <li key={compoundData.smilesString}>
+                        <input
+                          type="checkbox"
+                          checked={newReactionOutputs.includes(compoundId)}
+                          onChange={(e) => {
+                            let newNewReactionOutputs = [...newReactionOutputs];
+                            if (e.target.checked) {
+                              newNewReactionOutputs.push(compoundId);
+                            } else {
+                              let valueIndex =
+                                newNewReactionOutputs.indexOf(compoundId);
+                              newNewReactionOutputs.splice(valueIndex, 1);
+                            }
+                            setNewReactionOutputs(newNewReactionOutputs);
+                          }}
+                        />
+                        {compoundData.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
           </div>
-          <div className="reaction-outputs-list-container">
-            <h5>Outputs</h5>
-            <ul className="reaction-outputs-list">
-              {projectCompounds.map((compoundId: string) => {
-                const compoundData = compounds[compoundId];
-                return (
-                  <li key={compoundData.smilesString}>
-                    <input
-                      type="checkbox"
-                      checked={newReactionOutputs.includes(compoundId)}
-                      onChange={(e) => {
-                        let newNewReactionOutputs = [...newReactionOutputs];
-                        if (e.target.checked) {
-                          newNewReactionOutputs.push(compoundId);
-                        } else {
-                          let valueIndex =
-                            newNewReactionOutputs.indexOf(compoundId);
-                          newNewReactionOutputs.splice(valueIndex, 1);
-                        }
-                        setNewReactionOutputs(newNewReactionOutputs);
-                      }}
-                    />
-                    {compoundData.name}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-      </div>
+        </>
+      ) : (
+        <p>Add compounds to define reactions</p>
+      )}
     </div>
   );
 };

@@ -12,13 +12,13 @@
 
 .dialog-content {
   position: fixed;
-  top: 32px;
-  left: 32px;
-  right: 32px;
-  bottom: 32px;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
   display: flex;
   flex-direction: column;
-  padding: 16px 32px 32px 32px;
+  padding: 16px 16px 16px 16px;
   border-radius: 16px;
   background-color: black;
   border: 2px solid white;
