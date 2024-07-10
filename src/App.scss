@@ -1,11 +1,25 @@
 :root {
-  --bright-yellow: #d9c925;
-  --dim-yellow: #d9c9256e;
+  color-scheme: dark;
+  --dark-gray: #221f20;
+  --medium-gray: #bfbfbf;
+  --white: #fff;
+  --cyberpunk-bubblegum: #cf4673;
+  --bland-mustard: #d9c84b;
+  --minty-teal: #6ac4b0;
+  --peoples-purple: #491d88;
+  --relaxing-nectarine: #e07c31;
+  --exciting-dark-blue: #143b86;
+
+  --bland-mustard-transparent: #d9c84b6e;
+  --cyberpunk-bubblegum-transparent: #cf46736e;
+  --minty-teal-transparent: #6ac4b06e;
+  --peoples-purple-transparent: #491d886e;
+  --relaxing-nectarine-transparent: #e07c316e;
+  --exciting-dark-blue-transparent: #143b866e;
 }
 
 main {
   margin: 0 auto;
-  text-align: center;
 }
 
 ul {
@@ -14,16 +28,16 @@ ul {
 }
 
 a {
-  color: var(--bright-yellow);
+  color: var(--bland-mustard);
 }
 
 a:visited {
-  color: var(--bright-yellow);
+  color: var(--bland-mustard);
 }
 
 input[type="file"],
 button {
-  background-color: var(--bright-yellow);
+  background-color: var(--bland-mustard);
   color: #000;
 }
 

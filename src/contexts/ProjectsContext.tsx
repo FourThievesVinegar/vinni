@@ -27,6 +27,8 @@ interface ProjectType {
   // pathways: PathwayType[],
 }
 
+// These are entirely placeholder pseudocode and need further design
+
 /*
 interface CompoundType {
   name: string,
@@ -179,7 +181,7 @@ export const ProjectsProvider = ({ children }: any) => {
 
     saveAs(
       new Blob([JSON.stringify(exportObject)], { type: "application/json" }),
-      `${projects[projectId].name}-${projectId}.4tv`
+      `${projects[projectId].name}-${projectId}.4tvproj`
     ); // Export JSON file of the project
   };
 

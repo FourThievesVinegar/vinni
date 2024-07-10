@@ -3,11 +3,14 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px;
+
+  h2 {
+    text-align: center;
+  }
 }
 
 .projects-list-controls {
-  color: #000;
-  background-color: var(--dim-yellow);
+  background-color: var(--bland-mustard-transparent);
   padding: 16px;
 }
 
@@ -18,6 +21,8 @@
 }
 
 .projects-list {
+  text-align: center;
+  margin-bottom: 64px;
   li {
     margin: 16px;
   }
@@ -41,9 +46,10 @@
 
 .projects-page-accordion {
   width: 100%;
-  background: var(--dim-yellow);
+  background: var(--relaxing-nectarine-transparent);
   padding: 8px;
   box-sizing: border-box;
+  margin-bottom: 16px;
   h3 {
     margin: 0;
 
@@ -51,6 +57,10 @@
       width: 100%;
       cursor: pointer;
       margin: 0;
+      color: white;
+      background-color: transparent;
+      border-bottom: 4px solid white;
+      border-radius: 0;
     }
   }
 }
