@@ -22,16 +22,15 @@ const MESSAGE_TYPES = {
 
 export const RECIPE_EDITOR_DOMAIN =
   "https://recipe-press.fourthievesvinegar.org/";
-export const RECIPE_EDITOR_URL =
-  `${RECIPE_EDITOR_DOMAIN}?embedded=true`;
+export const RECIPE_EDITOR_URL = `${RECIPE_EDITOR_DOMAIN}?embedded=true`;
 
 const RecipesContext = createContext<RecipesContextType>({
-  addRecipe: (recipeId: string, recipe: any) => { },
-  addRecipes: (recipes: any) => { },
-  closeRecipeEditor: () => { },
+  addRecipe: (recipeId: string, recipe: any) => {},
+  addRecipes: (recipes: any) => {},
+  closeRecipeEditor: () => {},
   createRecipe: (text: string) => "",
   editingRecipe: null,
-  editRecipe: (title: string) => { },
+  editRecipe: (title: string) => {},
   recipes: {},
 });
 
@@ -65,8 +64,6 @@ export const RecipesProvider = ({ children }: any) => {
   }, []);
 
   useEffect(() => {
-    console.log("recipes", recipes)
-
     saveRecipes(recipes);
   }, [recipes]);
 
@@ -82,8 +79,9 @@ export const RecipesProvider = ({ children }: any) => {
     return () => {
       window.removeEventListener(
         "message",
-        handleMessageFromRecipeEditorIFrame)
-    }
+        handleMessageFromRecipeEditorIFrame
+      );
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editingRecipe]);
 
@@ -92,7 +90,6 @@ export const RecipesProvider = ({ children }: any) => {
   };
 
   const addRecipes = (newRecipes: any) => {
-    console.log('addRecipes', newRecipes)
     setRecipes({ ...recipes, ...newRecipes });
   };
 

@@ -12,14 +12,14 @@
 
 .dialog-content {
   position: fixed;
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
   display: flex;
   flex-direction: column;
-  padding: 16px 16px 16px 16px;
-  border-radius: 16px;
+  padding: 8px 8px 8px 8px;
+  border-radius: 8px;
   background-color: black;
   border: 2px solid white;
 }
@@ -28,7 +28,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 
   h2 {
     margin: 0;
@@ -38,7 +38,7 @@
     color: #fff;
     background-color: transparent;
     font-size: 32px;
-    line-height: 16px;
+    line-height: 8px;
   }
 }
 
