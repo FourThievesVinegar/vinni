@@ -1,5 +1,4 @@
 {
-  "name": "Test Project",
   "compounds": {},
   "notes": {},
   "reactions": {},
@@ -13,19 +12,16 @@
           "done": false,
           "options": [
             { "text": "Reagent Pumps", "next": 1 },
-            { "text": "Stirring", "next": 8 },
-            { "text": "Heating", "next": 15 },
-            { "text": "Cooling", "next": 20 }
+            { "text": "Stirring", "next": 6 },
+            { "text": "Heating", "next": 13 },
+            { "text": "Cooling", "next": 21 }
           ],
           "icon": "reaction_complete"
         },
         {
           "message": "Pump Tests",
           "done": false,
-          "options": [
-            { "text": "All Pumps (10ml)", "next": 2 },
-            { "text": "Pump X 10ml over 10 min", "next": 6 }
-          ],
+          "options": [{ "text": "All Pumps (10ml)", "next": 2 }],
           "icon": "dispensing"
         },
         {
@@ -54,35 +50,18 @@
           "done": false,
           "options": [
             { "text": "More!", "next": 0 },
-            { "text": "No way!", "next": 24 }
+            { "text": "No way!", "next": 25 }
           ],
           "icon": "dispensing"
-        },
-        {
-          "message": "Pump X - 10ml over 10 minutes",
-          "baseTask": "pump",
-          "parameters": { "pump": "X", "volume": 10, "time": 600 },
-          "done": false,
-          "next": 7,
-          "details": "Dispensing 10 ml over 10 minutes"
-        },
-        {
-          "message": "Dispense over time test complete. Would you like another?",
-          "baseTask": "humanTask",
-          "done": false,
-          "options": [
-            { "text": "Yes please", "next": 0 },
-            { "text": "No thanks", "next": 24 }
-          ]
         },
         {
           "message": "Stirring Tests",
           "baseTask": "humanTask",
           "done": false,
           "options": [
-            { "text": "Stir 5 seconds", "next": 9 },
-            { "text": "Stir 30 minutes", "next": 11 },
-            { "text": "Stir 12 hours", "next": 13 }
+            { "text": "Stir 5 seconds", "next": 7 },
+            { "text": "Stir 30 minutes", "next": 9 },
+            { "text": "Stir 12 hours", "next": 11 }
           ],
           "icon": "stirring"
         },
@@ -91,7 +70,7 @@
           "parameters": { "time": 5 },
           "done": false,
           "baseTask": "stir",
-          "next": 10,
+          "next": 8,
           "icon": "stirring"
         },
         {
@@ -100,7 +79,7 @@
           "done": false,
           "options": [
             { "text": "Yes", "next": 0 },
-            { "text": "No", "next": 24 }
+            { "text": "No", "next": 25 }
           ],
           "icon": "stirring"
         },
@@ -109,14 +88,14 @@
           "baseTask": "stir",
           "parameters": { "time": 1800 },
           "done": false,
-          "next": 12
+          "next": 10
         },
         {
           "message": "30m stirring test complete. Would you like another test?",
           "done": false,
           "options": [
             { "text": "Yes please!", "next": 0 },
-            { "text": "No thanks.", "next": 24 }
+            { "text": "No thanks.", "next": 25 }
           ],
           "icon": "stirring"
         },
@@ -125,7 +104,7 @@
           "parameters": { "temp": 35, "time": 43200 },
           "done": false,
           "baseTask": "stir",
-          "next": 14,
+          "next": 12,
           "details": "This temperature is necessary to speed the reaction."
         },
         {
@@ -133,7 +112,7 @@
           "done": false,
           "options": [
             { "text": "I guess.", "next": 0 },
-            { "text": "Nah.", "next": 24 }
+            { "text": "Nah.", "next": 25 }
           ],
           "icon": "stirring"
         },
@@ -141,7 +120,10 @@
           "message": "Heating Tests",
           "baseTask": "humanTask",
           "done": false,
-          "options": [{ "text": "Heat to 30 (and stir)", "next": 16 }],
+          "options": [
+            { "text": "Heat to 30 (and stir) ", "next": 14 },
+            { "text": "Heat to 50", "next": 18 }
+          ],
           "icon": "maintain_heat"
         },
         {
@@ -150,17 +132,22 @@
           "parameters": { "temp": 30 },
           "done": false,
           "icon": "heating",
-          "next": 17,
-          "andStir": true
+          "next": 15
         },
         {
           "message": "Maintaining heat",
           "baseTask": "maintainHeat",
           "parameters": { "temp": 30, "tolerance": 2, "time": 10 },
           "done": false,
-          "next": 18,
-          "andStir": true,
-          "tasks": [{ "baseTask": "stir", "parameters": { "time": 10 } }]
+          "next": 16
+        },
+        {
+          "message": "Stirring",
+          "baseTask": "stir",
+          "parameters": { "time": 10 },
+          "done": false,
+          "next": 17,
+          "icon": "stirring"
         },
         {
           "message": "Heating test complete. Want another?",
@@ -168,14 +155,31 @@
           "done": false,
           "options": [
             { "text": "Yup.", "next": 0 },
-            { "text": "Nope", "next": 24 }
+            { "text": "Nope", "next": 25 }
+          ]
+        },
+        {
+          "message": "Heating to 50C",
+          "baseTask": "heat",
+          "parameters": { "temp": 50 },
+          "done": false,
+          "icon": "heating",
+          "next": 19
+        },
+        {
+          "message": "Heating Test Complete. Want another?",
+          "baseTask": "humanTask",
+          "done": false,
+          "options": [
+            { "text": "No", "next": 25 },
+            { "text": "Yes", "next": 0 }
           ]
         },
         {
           "message": "Cooling Tests",
           "baseTask": "humanTask",
           "done": false,
-          "options": [{ "text": "Cool to 20C", "next": 21 }],
+          "options": [{ "text": "20C for 30 sec", "next": 22 }],
           "icon": "cooling"
         },
         {
@@ -184,14 +188,14 @@
           "parameters": { "temp": 20 },
           "done": false,
           "icon": "cooling",
-          "next": 21
+          "next": 22
         },
         {
           "message": "Keeping cool...",
           "baseTask": "maintainCool",
           "parameters": { "temp": 20, "time": 30, "tolerance": 2 },
           "done": false,
-          "next": 22
+          "next": 23
         },
         {
           "message": "Stirring...",
@@ -199,7 +203,7 @@
           "parameters": { "time": 30 },
           "done": false,
           "icon": "stirring",
-          "next": 23
+          "next": 24
         },
         {
           "message": "Cooling Test complete! Would you like another?",
@@ -207,13 +211,86 @@
           "done": false,
           "options": [
             { "text": "Yes.", "next": 0 },
-            { "text": "No", "next": 24 }
+            { "text": "No", "next": 25 }
           ]
         },
         {
           "message": "Okay then! That was always allowed.",
           "done": true,
           "icon": "reaction_complete"
+        }
+      ]
+    },
+    "nmYfe0AqMAyW": {
+      "title": "Caffeine Extraction",
+      "steps": [
+        {
+          "message": "Crush caffeine pill and place it in the reaction chamber with 30ml everclear.",
+          "baseTask": "humanTask",
+          "done": false,
+          "options": [{ "text": "Done", "next": 1 }],
+          "details": "You can also soak it in a small amount of water or everclear."
+        },
+        {
+          "message": "Fill syringe with 50ml everclear (75%+ ABV) and insert into Pump X.",
+          "baseTask": "humanTask",
+          "done": false,
+          "options": [{ "text": "Start Reaction", "next": 2 }]
+        },
+        {
+          "message": "Heating to 70C",
+          "baseTask": "heat",
+          "parameters": { "temp": 70 },
+          "done": false,
+          "icon": "heating",
+          "next": 3
+        },
+        {
+          "message": "Injecting Alcohol",
+          "baseTask": "pump",
+          "parameters": { "pump": "X", "volume": 50 },
+          "done": false,
+          "icon": "dispensing",
+          "next": 4
+        },
+        {
+          "message": "Stirring for 30 mins",
+          "baseTask": "stir",
+          "parameters": { "time": 1800 },
+          "done": false,
+          "icon": "stirring",
+          "andMaintainTemp": "maintainHeat",
+          "andMaintainTempTemp": "70",
+          "next": 5
+        },
+        {
+          "message": "Cooling",
+          "baseTask": "cool",
+          "parameters": { "temp": 10 },
+          "done": false,
+          "icon": "cooling",
+          "next": 6
+        },
+        {
+          "message": "Recrystalizing",
+          "baseTask": "stir",
+          "parameters": { "time": 600 },
+          "done": false,
+          "icon": "crystalisation",
+          "next": 7,
+          "andMaintainTemp": "maintainCool",
+          "andMaintainTempTemp": "05"
+        },
+        {
+          "message": "Remove the Reactor Core from the MicroLab and pour the contents of the reaction chamber through a paper filter.",
+          "baseTask": "humanTask",
+          "done": false,
+          "options": [{ "text": "done", "next": 8 }]
+        },
+        {
+          "message": "Allow to dry and measure the final product. Compare the weight to the listed contents on the pill's packaging.",
+          "baseTask": "humanTask",
+          "done": true
         }
       ]
     }
@@ -225,7 +302,7 @@
       "compounds": [],
       "pathways": [],
       "reactions": [],
-      "recipes": ["Ou-ZFxijTff3"]
+      "recipes": ["Ou-ZFxijTff3", "nmYfe0AqMAyW"]
     }
   }
 }
