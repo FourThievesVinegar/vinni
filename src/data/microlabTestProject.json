@@ -260,7 +260,7 @@
           "done": false,
           "icon": "stirring",
           "andMaintainTemp": "maintainHeat",
-          "andMaintainTempTemp": "70",
+          "andMaintainTempTemp": 70,
           "next": 5
         },
         {
@@ -279,7 +279,7 @@
           "icon": "crystalisation",
           "next": 7,
           "andMaintainTemp": "maintainCool",
-          "andMaintainTempTemp": "05"
+          "andMaintainTempTemp": 5
         },
         {
           "message": "Remove the Reactor Core from the MicroLab and pour the contents of the reaction chamber through a paper filter.",
