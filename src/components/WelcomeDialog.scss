@@ -1,0 +1,15 @@
+.welcome-dialog-content {
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.dialog-body,
+.welcome-dialog-content img {
+  position: relative;
+  max-width: 95%;
+  max-height: 95%;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
