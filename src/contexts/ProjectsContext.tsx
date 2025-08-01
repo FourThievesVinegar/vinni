@@ -1,28 +1,28 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { saveAs } from "file-saver";
-import { nanoid } from "nanoid";
+import { createContext, useContext, useEffect, useState } from 'react'
+import { saveAs } from 'file-saver'
+import { nanoid } from 'nanoid'
 
-import { useCompoundsContext } from "./CompoundsContext";
-import { NoteType, useNotesContext } from "./NotesContext";
-import { useRecipesContext } from "./RecipesContext";
+import { useCompoundsContext } from './CompoundsContext'
+import { NoteType, useNotesContext } from './NotesContext'
+import { useRecipesContext } from './RecipesContext'
 
-import testProject from "../data/microlabTestProject.json"
+import testProject from '../data/microlabTestProject.json'
 
 interface ProjectsContextType {
-  addCompoundToProject: (noteId: string, compoundId: string) => void;
-  removeCompoundFromProject: (compoundId: string, projectId: string) => void;
-  addNoteToProject: (noteId: string, projectId: string) => void;
-  addRecipeToProject: (recipeId: string, projectId: string) => void;
-  addReactionToProject: (reactionId: string, projectId: string) => void;
-  createProject: (name: string) => string;
-  exportProject: (projectId: string) => void;
-  importProject: (importObject: any) => void;
-  projects?: any;
+  addCompoundToProject: (noteId: string, compoundId: string) => void
+  removeCompoundFromProject: (compoundId: string, projectId: string) => void
+  addNoteToProject: (noteId: string, projectId: string) => void
+  addRecipeToProject: (recipeId: string, projectId: string) => void
+  addReactionToProject: (reactionId: string, projectId: string) => void
+  createProject: (name: string) => string
+  exportProject: (projectId: string) => void
+  importProject: (importObject: any) => void
+  projects?: any
 }
 
 interface ProjectType {
-  name: string;
-  notes: NoteType[];
+  name: string
+  notes: NoteType[]
   // compounds: CompoundType[],
   // pathways: PathwayType[],
 }
@@ -52,13 +52,6 @@ interface ReactionType {
 */
 
 /*
-interface RecipeType {
-  name: string,
-  steps: StepType[],
-}
-*/
-
-/*
 interface StepType {
   message: string,
   details?: string,
@@ -83,43 +76,42 @@ const ProjectsContext = createContext<ProjectsContextType>({
   addNoteToProject: () => null,
   addRecipeToProject: () => null,
   addReactionToProject: () => null,
-  createProject: () => "",
+  createProject: () => '',
   exportProject: () => null,
   importProject: () => null,
   projects: {},
-});
+})
 
 export const useProjectsContext = () => {
-  const context = useContext(ProjectsContext);
+  const context = useContext(ProjectsContext)
 
   if (!context) {
-    console.log("ERROR! ProjectsContext used outside its provider");
+    console.log('ERROR! ProjectsContext used outside its provider')
   }
 
-  return context;
-};
+  return context
+}
 
 const saveProjects = (projects: { string: ProjectType }) => {
-  localStorage.setItem("vinni-projects", JSON.stringify(projects));
-};
+  localStorage.setItem('vinni-projects', JSON.stringify(projects))
+}
 
 const loadProjects = () => {
-  const projects = JSON.parse(localStorage.getItem("vinni-projects") || "null")
-  return projects;
-};
+  const projects = JSON.parse(localStorage.getItem('vinni-projects') || 'null')
+  return projects
+}
 
 export const ProjectsProvider = ({ children }: any) => {
-  const [projects, setProjects] = useState<any>({});
+  const [projects, setProjects] = useState<any>({})
 
-  const { compounds, reactions, addCompounds, addReactions } =
-    useCompoundsContext();
-  const { notes, addNotes } = useNotesContext();
-  const { recipes, addRecipes } = useRecipesContext();
+  const { compounds, reactions, addCompounds, addReactions } = useCompoundsContext()
+  const { notes, addNotes } = useNotesContext()
+  const { recipes, addRecipes } = useRecipesContext()
 
   useEffect(() => {
     const savedProjects = loadProjects()
     if (savedProjects && Object.keys(savedProjects).length > 0) {
-      setProjects(savedProjects);
+      setProjects(savedProjects)
     } else {
       window.setTimeout(() => {
         // Let the recipes context initialize first
@@ -127,14 +119,14 @@ export const ProjectsProvider = ({ children }: any) => {
       }, 100)
     }
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   useEffect(() => {
-    saveProjects(projects);
-  }, [projects]);
+    saveProjects(projects)
+  }, [projects])
 
   const createProject = (name: string, project: null | Object = null) => {
-    const projectId = nanoid(12);
+    const projectId = nanoid(12)
     const newProjects = {
       ...projects,
       [projectId]: project || {
@@ -145,10 +137,10 @@ export const ProjectsProvider = ({ children }: any) => {
         reactions: [],
         recipes: [],
       },
-    };
-    setProjects(newProjects);
-    return projectId;
-  };
+    }
+    setProjects(newProjects)
+    return projectId
+  }
 
   const exportProject = (projectId: string) => {
     let exportObject: { [key: string]: { [key: string]: {} } } = {
@@ -157,96 +149,96 @@ export const ProjectsProvider = ({ children }: any) => {
       reactions: {},
       recipes: {},
       projects: {},
-    };
+    }
 
     const items: { [key: string]: { [key: string]: {} } } = {
       compounds,
       notes,
       reactions,
       recipes,
-    };
+    }
 
-    Object.keys(items).forEach((type) => {
+    Object.keys(items).forEach(type => {
       projects[projectId][type].forEach((id: string) => {
-        const item = items[type][id];
+        const item = items[type][id]
         if (item) {
-          exportObject[type][id] = item;
+          exportObject[type][id] = item
         }
-      });
-    });
+      })
+    })
 
     exportObject.projects = {
       [projectId]: { ...projects[projectId] },
-    };
+    }
 
     saveAs(
-      new Blob([JSON.stringify(exportObject)], { type: "application/json" }),
+      new Blob([JSON.stringify(exportObject)], { type: 'application/json' }),
       `${projects[projectId].name}-${projectId}.4tvproj`
-    ); // Export JSON file of the project
-  };
+    ) // Export JSON file of the project
+  }
 
   const importProject = (importObject: any) => {
-    addCompounds(importObject.compounds);
-    addNotes(importObject.notes);
-    addReactions(importObject.reactions);
-    addRecipes(importObject.recipes);
+    addCompounds(importObject.compounds)
+    addNotes(importObject.notes)
+    addReactions(importObject.reactions)
+    addRecipes(importObject.recipes)
 
-    setProjects({ ...projects, ...importObject.projects });
-  };
+    setProjects({ ...projects, ...importObject.projects })
+  }
 
   function addCompoundToProject(compoundId: string, projectId: string) {
-    let newCompounds = [...projects[projectId]["compounds"]];
-    newCompounds.push(compoundId);
+    let newCompounds = [...projects[projectId]['compounds']]
+    newCompounds.push(compoundId)
     const newProjects = {
       ...projects,
       [projectId]: { ...projects[projectId], compounds: [...newCompounds] },
-    };
+    }
 
-    setProjects(newProjects);
-  };
+    setProjects(newProjects)
+  }
 
   function removeCompoundFromProject(compoundId: string, projectId: string) {
-    let newCompounds = [...projects[projectId]["compounds"]];
-    newCompounds.splice(newCompounds.indexOf(compoundId), 1);
+    let newCompounds = [...projects[projectId]['compounds']]
+    newCompounds.splice(newCompounds.indexOf(compoundId), 1)
     const newProjects = {
       ...projects,
       [projectId]: { ...projects[projectId], compounds: [...newCompounds] },
-    };
-    setProjects(newProjects);
+    }
+    setProjects(newProjects)
   }
 
   function addNoteToProject(noteId: string, projectId: string) {
-    let newNotes = [...projects[projectId]["notes"]];
-    newNotes.push(noteId);
+    let newNotes = [...projects[projectId]['notes']]
+    newNotes.push(noteId)
     const newProjects = {
       ...projects,
       [projectId]: { ...projects[projectId], notes: [...newNotes] },
-    };
+    }
 
-    setProjects(newProjects);
-  };
+    setProjects(newProjects)
+  }
 
   function addReactionToProject(reactionId: string, projectId: string) {
-    let newReactions = projects[projectId]["reactions"];
-    newReactions.push(reactionId);
+    let newReactions = projects[projectId]['reactions']
+    newReactions.push(reactionId)
     const newProjects = {
       ...projects,
       [projectId]: { ...projects[projectId], reactions: [...newReactions] },
-    };
+    }
 
-    setProjects(newProjects);
-  };
+    setProjects(newProjects)
+  }
 
   function addRecipeToProject(recipeId: string, projectId: string) {
-    let newRecipes = projects[projectId]["recipes"];
-    newRecipes.push(recipeId);
+    let newRecipes = projects[projectId]['recipes']
+    newRecipes.push(recipeId)
     const newProjects = {
       ...projects,
       [projectId]: { ...projects[projectId], recipes: [...newRecipes] },
-    };
+    }
 
-    setProjects(newProjects);
-  };
+    setProjects(newProjects)
+  }
 
   return (
     <ProjectsContext.Provider
@@ -264,5 +256,5 @@ export const ProjectsProvider = ({ children }: any) => {
     >
       {children}
     </ProjectsContext.Provider>
-  );
-};
+  )
+}
