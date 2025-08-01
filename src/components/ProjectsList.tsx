@@ -30,7 +30,7 @@ export const ProjectsList = () => {
         <div className="new-project-buttons">
           <button onClick={() => createProject()}>Create New Project</button>{' '}
           <div className="import-project-container">
-            <label htmlFor="import-file">Import Project:</label>{' '}
+            <label htmlFor="import-file">Import Project</label>{' '}
             <input
               type="file"
               id="myFile"
