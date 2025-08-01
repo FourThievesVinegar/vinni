@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import * as Accordion from '@radix-ui/react-accordion'
 import { useRecipesContext } from '../../contexts/RecipesContext'
 import { useProjectsContext } from '../../contexts/ProjectsContext'
@@ -23,6 +23,26 @@ export const ProjectRecipes = ({ projectRecipes = [], projectId }: ProjectRecipe
     addRecipeToProject(recipeId, projectId)
     editRecipe(recipeId)
     setNewRecipeText('')
+  }
+
+  const handleUploadRecipe = (e: ChangeEvent<HTMLInputElement>) => {
+    const fileReader = new FileReader()
+    const file = e?.target?.files?.item(0)
+
+    fileReader.addEventListener('load', () => {
+      const importObject = fileReader.result ? JSON.parse(fileReader.result as string) : null
+      if (importObject) {
+        console.log(importObject)
+        const recipeId = createRecipe(newRecipeTitle, importObject)
+        addRecipeToProject(recipeId, projectId)
+      }
+    })
+    if (file) {
+      fileReader.readAsText(file)
+    }
+    if (e?.target) {
+      e.target.value = ''
+    }
   }
 
   const handleEditRecipe = (recipeId: string) => {
@@ -81,21 +101,7 @@ export const ProjectRecipes = ({ projectRecipes = [], projectId }: ProjectRecipe
                 id="myFile"
                 name="import-file"
                 onChange={e => {
-                  const fileReader = new FileReader()
-                  const file = e?.target?.files?.item(0)
-
-                  fileReader.addEventListener('load', () => {
-                    const importObject = fileReader.result
-                      ? JSON.parse(fileReader.result as string)
-                      : null
-                    if (importObject) {
-                      console.log(importObject)
-                      createRecipe(newRecipeTitle, importObject)
-                    }
-                  })
-                  if (file) {
-                    fileReader.readAsText(file)
-                  }
+                  handleUploadRecipe(e)
                 }}
               />
             </div>
